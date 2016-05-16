@@ -1,0 +1,22 @@
+<ion-view view-title="Login" name="login-view" Title="ITrak Data" hide-nav-bar="true" hide-back-button="true" scroll="false" padding="true" class="manual-ios-statusbar-padding">
+    <ion-header-bar class="bar-stable ic_header">
+    <div class="ic_header_icon"></div>
+  </ion-header-bar>
+
+    <ion-content class="ic_app_background">
+        <div class="ic_login_content">
+            <div class="list list-inset">
+          <label class="item item-input">
+              <input type="text" placeholder="Username" ng-model="user.username">
+          </label>
+          <label class="item item-input">
+              <input type="password" placeholder="Password" ng-model="user.password">
+          </label>
+      </div>
+            <button class="ic_button" ng-click="login()">Login</button>
+            <div>
+
+            </div>
+        </div>
+  </ion-content>
+</ion-view>

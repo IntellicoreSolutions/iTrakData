@@ -1,0 +1,17 @@
+<ion-view title="Nominals" hide-back-button="true" id="page8" class=" ">
+    <ion-content padding="true" class="has-header">
+        <form id="nominals-form3" class="list ">
+            <label class="item item-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="search" placeholder="" ng-model="search">
+            </label>
+        </form>
+        <ion-list id="nominals-list5" class=" " show-delete="false" can-swipe="true">
+            <ion-item collection-repeat="Nominal in Nominals | orderBy:'name' | searchNominals:search" ng-click='nominalClick($event)' data-ui-sref="tabsController.nominalTimeCaptureDetails({ Id: Nominal.alpha2_code })">
+				{{Nominal.name}} - {{Nominal.alpha2_code}} - {{Nominal.alpha3_code}}
+                <ion-option-button class="button-light icon ion-heart"></ion-option-button>
+                <ion-option-button class="button-light icon ion-email"></ion-option-button>
+			</ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

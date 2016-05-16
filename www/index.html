@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+
+    <title>AngularJS and CRM OData</title>
+    
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <!-- compiled css output -->
+    <link href="css/ionic.app.css" rel="stylesheet">
+    <link href="css/intellicore.app.css" rel="stylesheet" />
+    
+    <style type="text/css">
+      .platform-ios .manual-ios-statusbar-padding{
+        padding-top:20px;
+      }
+      .manual-remove-top-padding{
+        padding-top:0px; 
+      }
+      .manual-remove-top-padding .scroll{
+        padding-top:0px !important;
+      }
+    </style>
+	
+    <script src="js/adal.js"></script>
+    <script src="js/adal-angular.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/routes.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/directives.js"></script>
+    <script src="js/stopwatch.js"></script>
+    <script src="js/authentication.js"></script>
+
+    <!-- Only required for Tab projects w/ pages in multiple tabs 
+    <script src="lib/ionicuirouter/ionicUIRouter.js"></script>
+    -->
+
+      <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,700' rel='stylesheet' type='text/css'>
+  </head>
+  <body ng-app="app" animation="slide-left-right-ios7">
+  <div>
+    <ion-side-menus enable-menu-with-back-views="false" data-componentid="side-menu21">
+        <ion-side-menu-content>
+            <ion-nav-bar class="bar-stable">
+                <ion-nav-back-button></ion-nav-back-button>
+                <ion-nav-buttons side="left">
+                    <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+                </ion-nav-buttons>
+            </ion-nav-bar>
+            <ion-nav-view></ion-nav-view>
+        </ion-side-menu-content>
+        <ion-side-menu side="left" id="side-menu21">
+            <ion-header-bar class="bar-stable">
+                <div class="title fg-blue">Lets Do This Thing!</div>
+            </ion-header-bar>
+            <ion-content padding="false" class="side-menu-left has-header ic_app_background">
+                <ion-list id="menu-list13" class="" data-componentid="list13">
+                    <ion-item class="item-icon-left" id="menu-list-item22" ui-sref="tabsController.projects" menu-close="" data-componentid="list-item22">
+                        <i class="icon ion-android-time"></i>Track Time</ion-item>
+                    <ion-item class="item-icon-left" id="menu-list-item23" data-componentid="list-item23">
+                        <i class="icon ion-cash"></i>Track Expenses</ion-item>
+                    <ion-item class="item-icon-left" id="menu-list-item24" data-componentid="list-item24">
+                        <i class="icon ion-android-chat"></i>Track Feedback</ion-item>
+                    <ion-item class="item-icon-left" id="menu-list-item25" data-componentid="list-item25">
+                        <i class="icon ion-email"></i>Track Activity</ion-item>
+                    <ion-item class="item-icon-left" id="menu-list-item51" data-componentid="list-item51">
+                        <i class="icon ion-android-plane"></i>Track Holidays</ion-item>
+                    <ion-item class="item-icon-left" id="menu-list-item53" data-componentid="list-item53">
+                        <i class="icon ion-ios-medkit"></i>Track Absences</ion-item>
+                    <ion-item class="item-icon-left" id="menu-list-item31" data-componentid="list-item31">
+                        <i class="icon ion-ios-settings-strong"></i>Settings</ion-item>
+                     <ion-item class="item-icon-left" id="Ion-item1" data-componentid="list-item31") ui-sref="login" menu-close="">
+                         <i class="icon ion-log-out"></i>Logout</ion-item>                   
+                </ion-list>
+            </ion-content>
+        </ion-side-menu>
+    </ion-side-menus>
+</div>
+  </body>
+</html>

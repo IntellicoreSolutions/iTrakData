@@ -1,0 +1,141 @@
+﻿.ic_header_icon {
+  background: url('../img/IC-logo-main-bkg.png');
+  background-size: 100% auto !important;
+  background-repeat: no-repeat;
+  width: 170px;
+  height: 48px;
+  margin-left: auto;
+  margin-right: auto;
+  vertical-align: central;
+}
+
+.ic_app_background {
+  width: 100%;
+  height: calc(100% - 79px);
+  background: url('../img/app_background.jpg');
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
+  top: 80px !important;
+}
+
+.ic_header {
+  background: #fff !important;
+  height: 80px !important;
+}
+
+@font-face {
+  font-family: 'Poiret One';
+  src: url('../fonts/PoiretOne-Regular.ttf');
+}
+
+body {
+  font-family: "Poiret One";
+}
+
+h1 {
+  color: #00b0b7;
+  font-weight: lighter;
+  font-family: "Poiret One";
+  font-size: 50px;
+  text-align: left;
+  margin-bottom: 30px;
+}
+
+.ic_login-content {
+    top: 0px !important;
+}
+
+.ic_button {
+  background: none;
+  border: 2px solid #00b0b7;
+  border-radius: 8px;
+  color: #00b0b7;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 95%;
+}
+
+
+
+
+<!-- latest -->
+.wrapper {
+    max-width: 620px;
+    height: auto;
+}
+
+.box {
+    display: inline-block;
+    position: relative;
+    width: 175px;
+    height: 175px;
+    z-index: 0;
+    margin: 2px auto 2px auto;
+    transition: all .15s ease-in-out;
+    text-align: center;
+}
+
+/* The ghost, nudged to maintain perfect centering */
+.box:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -0.25em; /* Adjusts for spacing */
+}
+
+.box:hover {
+    background: #9CC;
+    z-index: 100;
+    transform: scale(1.2,1.2);
+    box-shadow: 0 5px 10px 0 rgba(0,0,0,.2);
+}
+
+.tile-content {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.icon img {
+    background-color:transparent;
+    margin-bottom:10px;
+}
+
+
+.bg-blue {
+        background: #4BC3D6;
+}
+
+.bg-green {
+    background-color: #4bd6a4;
+}
+
+.bg-black {
+    background-color: #ffffff;
+}
+
+.bg-transparent {
+    background-color:transparent;
+}
+
+fg-black {
+    color: black;
+}
+
+fg-white {
+    color: white;
+}
+
+fg-blue {
+    color: #00b0b7;
+}
+<!-- landing page -->
+
+.side-menu {
+
+}

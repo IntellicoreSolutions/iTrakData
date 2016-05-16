@@ -1,0 +1,17 @@
+<ion-view title="Projects" hide-back-button="true" id="page5" class=" ">
+    <ion-content padding="true" class="has-header">
+        <form id="projects-form1" class="list ">
+            <label class="item item-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="search" placeholder="" ng-model="search">
+            </label>
+        </form>
+        <ion-list id="projects-list1" class=" "  show-delete="false" can-swipe="true">
+            <ion-item class="item-icon-left item-icon-right  " id="projects-list-item2" collection-repeat="Project in Projects | orderBy:'name' | searchProjects:search" ng-click='projectClick($event)' ui-sref="tabsController.projectTimeCaptureDetails({ Id: Project.alpha2_code })">
+                {{Project.name}} - {{Project.alpha2_code}} - {{Project.alpha3_code}}
+                <ion-option-button class="button-light icon ion-heart"></ion-option-button>
+                <ion-option-button class="button-light icon ion-email"></ion-option-button>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

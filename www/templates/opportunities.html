@@ -1,0 +1,17 @@
+<ion-view title="Opportunities" hide-back-button="true" id="page6" class=" ">
+    <ion-content padding="true" class="has-header">
+        <form id="opportunities-form9" class="list ">
+            <label class="item item-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="search" placeholder="" ng-model="search">
+            </label>
+        </form>
+        <ion-list id="opportunities-list15" class=" " show-delete="false" can-swipe="true">
+            <ion-item class="item-icon-right  " id="opportunities-list-item33" collection-repeat="Opportunity in Opportunities | orderBy:'name' | searchOpportunities:search" ng-click='opportunityClick($event)' ui-sref="tabsController.opportunityTimeCaptureDetails({Id: Opportunity.alpha2_code})">
+                {{Opportunity.name}} - {{Opportunity.alpha2_code}} - {{Opportunity.alpha3_code}}
+                <ion-option-button class="button-light icon ion-heart"></ion-option-button>
+                <ion-option-button class="button-light icon ion-email"></ion-option-button>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

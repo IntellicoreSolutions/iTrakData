@@ -1,0 +1,56 @@
+<ion-view title="Nominal Time Capture - Log Time" id="page14" class=" ">
+    <ion-content padding="true" class="has-header">
+        <h1 id="nominalTimeCaptureLogTime-heading5" style="color:#000000;text-align:center;" class=" ">{{Nominal.name}}</h1>
+        <div id="nominalTimeCaptureLogTime-button-bar4" class=" button-bar ">
+            <a ng-click="checkTimer()" id="nominalTimeCaptureLogTime-button12" class=" button button-stable  button-block button-outline ">Details</a>
+            <button id="nominalTimeCaptureLogTime-button13" class=" button button-dark  button-block ">Log Time</button>
+        </div>
+        <form id="timeForm" class="list ">
+            <label class="item item-input " id="nominalTimeCaptureLogTime-textarea2">
+                <span class="input-label">Description</span><textarea placeholder="" required> </textarea>
+            </label>
+            <ion-toggle toggle-class="toggle-positive" id="nominalTimeCaptureLogTime-toggle3" class=" " ng-model="UseTimer" ng-clicked="UserTimerToggled()">Timer Input</ion-toggle>
+            </form>
+
+                <div ng-app="stopWatchApp" ng-controller="stopWatchDemoCtrl" ng-show="UseTimer">
+            <div ng-repeat="options in stopwatches"> 
+                <div bb-stopwatch options="options">
+                    <div class="container">
+                      <div>
+                        <h1 id="H1" style="color:#000000;text-align:center;" class="stopWatch numbers">{{options.elapsedTime | stopwatchTime}}</h1>
+                      </div>
+                        <button id="nominal-log-start" ng-hide="options.running" class=" button button-balanced  button-block " ng-click="startTimer()">Start</button>
+                        <button id="nominal-log-stop" ng-show="options.running" class=" button button-balanced  button-block " ng-click="stopTimer()">Stop</button>
+                        <button id="nominal-log-reset" ng-show="options.showreset" class=" button button-balanced  button-block " ng-click="resetTimer()">Reset</button>
+                       
+                   </div>
+               </div>
+                </div>
+        </div>
+
+        <ion-list id="nominalTimeCaptureLogTime-list9" class=" " ng-hide="UseTimer">
+            <label class="item item-input " id="nominalTimeCaptureLogTime-input4">
+                <span class="input-label">From</span>
+                <input type="date" placeholder="">
+            </label>
+            <label class="item item-input " id="nominalTimeCaptureLogTime-input5">
+                <span class="input-label">From</span>
+                <input type="time" placeholder="">
+            </label>
+            <label class="item item-input " id="nominalTimeCaptureLogTime-input6">
+                <span class="input-label">To</span>
+                <input type="date" placeholder="">
+            </label>
+            <label class="item item-input " id="nominalTimeCaptureLogTime-input7">
+                <span class="input-label">To</span>
+                <input type="time" placeholder="">
+            </label>
+            <button id="Button1" class=" button button-balanced  button-block " ng-click="createTimeLine()">Create Time Line</button>
+
+        </ion-list>
+        <h5 id="nominalTimeCaptureLogTime-heading7" style="color:#000000;" class=" ">Previous Time Lines:</h5>
+        <ion-item collection-repeat="timeline in Timelines" ng-click='timelineClick($event)'>
+				{{timeline.alpha2_code}}:{{timeline.alpha2_code}} - {{timeline.alpha2_code}}:{{timeline.alpha2_code}}
+			</ion-item>
+    </ion-content>
+</ion-view>

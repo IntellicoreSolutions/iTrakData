@@ -1,0 +1,77 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   'angular-cookies.js' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.38
+4 verbose node symlink C:\Program Files\nodejs\\node.exe
+5 warn package.json itrakdata7@1.1.1 No repository field.
+6 warn package.json itrakdata7@1.1.1 No README data
+7 verbose readDependencies using package.json deps
+8 verbose cache add [ 'angular-cookies.js', null ]
+9 verbose cache add name=undefined spec="angular-cookies.js" args=["angular-cookies.js",null]
+10 verbose parsed url { protocol: null,
+10 verbose parsed url   slashes: null,
+10 verbose parsed url   auth: null,
+10 verbose parsed url   host: null,
+10 verbose parsed url   port: null,
+10 verbose parsed url   hostname: null,
+10 verbose parsed url   hash: null,
+10 verbose parsed url   search: null,
+10 verbose parsed url   query: null,
+10 verbose parsed url   pathname: 'angular-cookies.js',
+10 verbose parsed url   path: 'angular-cookies.js',
+10 verbose parsed url   href: 'angular-cookies.js' }
+11 silly lockFile d67aefa0-angular-cookies-js angular-cookies.js
+12 verbose lock angular-cookies.js C:\Users\barry.booth\AppData\Roaming\npm-cache\d67aefa0-angular-cookies-js.lock
+13 silly lockFile d67aefa0-angular-cookies-js angular-cookies.js
+14 silly lockFile d67aefa0-angular-cookies-js angular-cookies.js
+15 verbose addNamed [ 'angular-cookies.js', '' ]
+16 verbose addNamed [ null, '*' ]
+17 silly lockFile 124bd62f-angular-cookies-js angular-cookies.js@
+18 verbose lock angular-cookies.js@ C:\Users\barry.booth\AppData\Roaming\npm-cache\124bd62f-angular-cookies-js.lock
+19 silly addNameRange { name: 'angular-cookies.js', range: '*', hasData: false }
+20 verbose request where is /angular-cookies.js
+21 verbose request registry https://registry.npmjs.org/
+22 verbose request id 0bc9a20fcfb8e311
+23 verbose url raw /angular-cookies.js
+24 verbose url resolving [ 'https://registry.npmjs.org/', './angular-cookies.js' ]
+25 verbose url resolved https://registry.npmjs.org/angular-cookies.js
+26 verbose request where is https://registry.npmjs.org/angular-cookies.js
+27 info trying registry request attempt 1 at 16:49:30
+28 http GET https://registry.npmjs.org/angular-cookies.js
+29 http 404 https://registry.npmjs.org/angular-cookies.js
+30 silly registry.get cb [ 404,
+30 silly registry.get   { 'content-type': 'application/json',
+30 silly registry.get     'cache-control': 'max-age=0',
+30 silly registry.get     'content-length': '2',
+30 silly registry.get     'accept-ranges': 'bytes',
+30 silly registry.get     date: 'Sun, 15 May 2016 15:49:29 GMT',
+30 silly registry.get     via: '1.1 varnish',
+30 silly registry.get     age: '0',
+30 silly registry.get     connection: 'keep-alive',
+30 silly registry.get     'x-served-by': 'cache-lhr6321-LHR',
+30 silly registry.get     'x-cache': 'MISS',
+30 silly registry.get     'x-cache-hits': '0',
+30 silly registry.get     'x-timer': 'S1463327369.036783,VS0,VE168',
+30 silly registry.get     vary: 'Accept-Encoding' } ]
+31 silly lockFile 124bd62f-angular-cookies-js angular-cookies.js@
+32 silly lockFile 124bd62f-angular-cookies-js angular-cookies.js@
+33 error 404 Not Found
+33 error 404
+33 error 404 'angular-cookies.js' is not in the npm registry.
+33 error 404 You should bug the author to publish it
+33 error 404 It was specified as a dependency of 'itrakdata7'
+33 error 404
+33 error 404 Maybe try 'npm search angular cookies'
+33 error 404
+33 error 404 Note that you can also install from a
+33 error 404 tarball, folder, or http url, or git url.
+34 error System Windows_NT 6.2.9200
+35 error command "C:\\Program Files\\nodejs\\\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "angular-cookies.js"
+36 error cwd C:\Users\barry.booth\Desktop\projects\mobileApp\ITrakData7
+37 error node -v v0.10.38
+38 error npm -v 1.4.28
+39 error code E404
+40 verbose exit [ 1, true ]
