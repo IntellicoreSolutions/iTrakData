@@ -1,19 +1,16 @@
 <ion-view title="Opportunity Time Capture - Details" id="page15" class=" ">
     <ion-content padding="true" class="has-header">
-        <h1 id="opportunityTimeCaptureDetails-heading9" style="color:#000000;text-align:center;" class=" ">Nicol of Skene</h1>
-        <h4 id="opportunityTimeCaptureDetails-heading10" style="color:#000000;text-align:center;" class=" ">ITrak System</h4>
+        <h1 id="opportunityTimeCaptureDetails-heading9" style="color:#000000;text-align:center;" class=" ">{{Opportunity.customer}}</h1>
+        <h4 id="opportunityTimeCaptureDetails-heading10" style="color:#000000;text-align:center;" class=" ">{{Opportunity.name}}</h4>
         <div id="opportunityTimeCaptureDetails-button-bar5" class=" button-bar ">
             <button id="opportunityTimeCaptureDetails-button15" class=" button button-dark  button-block ">Details</button>
             <a ui-sref="tabsController.opportunityTimeCaptureLogTime" id="opportunityTimeCaptureDetails-button16" class=" button button-light  button-block button-outline ">Log Time</a>
         </div>
         <div>
             <p>
-                Sales Person
-                <b>Andy Joss</b>
+                Sales Person: <b>{{Opportunity.salesperson}}</b><br />
+                Description: <b>{{Opportunity.description}}</b><br />
             </p>
-        </div>
-        <div id="opportunityTimeCaptureDetails-markdown2" style="color:#000000;" class=" ">
-            <p>This would be the description from the opportunity</p>
         </div>
     </ion-content>
 </ion-view>

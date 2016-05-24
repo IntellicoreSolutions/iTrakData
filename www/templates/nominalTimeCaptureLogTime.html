@@ -49,7 +49,8 @@
 
         </ion-list>
         <h5 id="nominalTimeCaptureLogTime-heading7" style="color:#000000;" class=" ">Previous Time Lines:</h5>
-        <ion-item collection-repeat="timeline in Timelines" ng-click='timelineClick($event)'>
+
+        <ion-item n-repeat="timeline in Timelines" ng-click='timelineClick($event)' class="cd-timeline-icon royal">
 				{{timeline.alpha2_code}}:{{timeline.alpha2_code}} - {{timeline.alpha2_code}}:{{timeline.alpha2_code}}
 			</ion-item>
     </ion-content>

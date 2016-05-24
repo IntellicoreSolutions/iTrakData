@@ -7,8 +7,8 @@
             </label>
         </form>
         <ion-list id="nominals-list5" class=" " show-delete="false" can-swipe="true">
-            <ion-item collection-repeat="Nominal in Nominals | orderBy:'name' | searchNominals:search" ng-click='nominalClick($event)' data-ui-sref="tabsController.nominalTimeCaptureDetails({ Id: Nominal.alpha2_code })">
-				{{Nominal.name}} - {{Nominal.alpha2_code}} - {{Nominal.alpha3_code}}
+            <ion-item collection-repeat="Nominal in Nominals | orderBy:'intellicore_name' | searchNominals:search" ng-click='nominalClick($event)' data-ui-sref="tabsController.nominalTimeCaptureDetails({ Id: Nominal.id })">
+				{{Nominal.intellic_code}} - {{Nominal.intellic_name}}
                 <ion-option-button class="button-light icon ion-heart"></ion-option-button>
                 <ion-option-button class="button-light icon ion-email"></ion-option-button>
 			</ion-item>

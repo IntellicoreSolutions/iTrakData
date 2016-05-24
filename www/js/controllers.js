@@ -1,29 +1,101 @@
 angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
 //angular.module('Authentication')
 
-.controller('projectsCtrl', function ($scope, projectService) {
+.controller('projectsCtrl', function ($scope, projectService, $state, StopwatchFactory, $ionicLoading) {
     console.log('in projects controller');
+
+    $scope.show = function () {
+        $ionicLoading.show({
+            template: '<p>Loading...</p><ion-spinner></ion-spinner>'
+        });
+    };
+
+    $scope.hide = function () {
+        $ionicLoading.hide();
+    };
+
+    $scope.show($ionicLoading);
     projectService.getProjects().then(function (Projects) {
+        console.log(Projects);
         $scope.Projects = Projects;
-        console.log($scope.Projects);
+    }).finally(function ($ionicLoading) {
+        // On both cases hide the loading
+        $scope.hide($ionicLoading);
     });
+
+    //$scope.projectClick = function loadProject(clickEvent) {
+    //    $scope.clickEvent = simpleKeys(clickEvent);
+    //    angular.element(clickEvent.currentTarget);
+
+    //    /*
+    //    * return a copy of an object with only non-object keys
+    //    * we need this to avoid circular references
+    //    */
+    //    function simpleKeys(original) {
+    //        return Object.keys(original).reduce(function (obj, key) {
+    //            obj[key] = typeof original[key] === 'object' ? '{ ... }' : original[key];
+    //            return obj;
+    //        }, {});
+    //    }
+    //};
+
+    $scope.setProject = function setProject(Project) {
+        projectService.setProject(Project);
+        $scope.Project = Project;
+    };
+
+    $scope.doRefresh = function () {
+        $scope.Projects = projectService.getProjects();
+        $scope.$broadcast('scroll.refreshComplete');
+    };
 })
 
-.controller('opportunitiesCtrl', function ($scope, opportunityService) {
+.controller('opportunitiesCtrl', function ($scope, opportunityService, StopwatchFactory) {
     opportunityService.getOpportunities().then(function (Opportunities) {
         $scope.Opportunities = Opportunities;
+        console.log($scope.Opportunities);
     });
 
-    console.log($scope.Opportunities);
+    $scope.opportunityClick = function loadOpportunity(clickEvent) {
+        $scope.clickEvent = simpleKeys(clickEvent);
+        angular.element(clickEvent.currentTarget);
+        console.log(angular.element(clickEvent.currentTarget).text());
+        /*
+        * return a copy of an object with only non-object keys
+        * we need this to avoid circular references
+        */
+        function simpleKeys(original) {
+            return Object.keys(original).reduce(function (obj, key) {
+                obj[key] = typeof original[key] === 'object' ? '{ ... }' : original[key];
+                return obj;
+            }, {});
+        }
+    };
 })
 
-.controller('ticketsCtrl', function ($scope, ticketService) {
+.controller('ticketsCtrl', function ($scope, ticketService, StopwatchFactory) {
     ticketService.getTickets().then(function (Tickets) {
         $scope.Tickets = Tickets;
     });
+
+    $scope.ticketClick = function loadTicket(clickEvent) {
+        $scope.clickEvent = simpleKeys(clickEvent);
+        angular.element(clickEvent.currentTarget);
+        console.log(angular.element(clickEvent.currentTarget).text());
+        /*
+        * return a copy of an object with only non-object keys
+        * we need this to avoid circular references
+        */
+        function simpleKeys(original) {
+            return Object.keys(original).reduce(function (obj, key) {
+                obj[key] = typeof original[key] === 'object' ? '{ ... }' : original[key];
+                return obj;
+            }, {});
+        }
+    };
 })
 
-.controller('nominalsCtrl', function ($scope, nominalService) {
+.controller('nominalsCtrl', function ($scope, nominalService, StopwatchFactory) {
     nominalService.getNominals().then(function (Nominals) {
         $scope.Nominals = Nominals;
     });
@@ -48,8 +120,8 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
 .controller('loginCtrl', ['$scope', '$rootScope', '$location', '$state', 'AuthenticationService', function ($scope, $rootScope, $location, $state, AuthenticationService) {
         
     $scope.user = {};
-    $scope.user.username = "test";
-    $scope.user.password = "test";
+    $scope.user.username = "barry.booth@intellicore.co.uk";
+    $scope.user.password = "BJB5_1st3b";
 
         // reset login status
         AuthenticationService.ClearCredentials();
@@ -60,7 +132,7 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
             AuthenticationService.Login($scope.user.username, $scope.user.password, function(response) {
                 if (response.success) {
                     console.log('authentication successful');
-                    AuthenticationService.SetCredentials($scope.username, $scope.password);
+                    AuthenticationService.SetCredentials($scope.user.username, $scope.user.password, response.ID);
                     $state.go('landingPage');
 
                 } else {
@@ -90,41 +162,135 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
 
 })
 
-.controller('projectTimeCaptureDetailsCtrl', function ($scope) {
+.controller('projectTimeCaptureDetailsCtrl', function ($scope, $rootScope, $filter, $stateParams, projectService, StopwatchFactory, $ionicPopup, timesheetService) {
+    $scope.Project = projectService.getProject($stateParams.Id, false);
+    $scope.Timesheet = {};
 
+    //listen for the stopwatch to be started.
+    $scope.$on('ic-stopwatch-started', function (event, args) {
+
+        console.log(args);
+
+        //Log Date
+        $scope.Timesheet.date = $filter('date')(new Date(), 'dd/MM/yyyy');
+        //Log StartTime
+        $scope.Timesheet.starttime = $filter('date')(new Date(), 'dd/MM/yyyy hh:mm:ss');
+
+    });
+    //listen for stopwatch stopped.
+    $scope.$on('ic-stopwatch-stopped', function (event, args) {
+        console.log(args);
+        console.log($scope.Description);
+        console.log($scope.SelectedPhase);
+
+        //convert the timestamp to a date time object
+        var elapsed = args.elapsed;
+        var hours = parseInt(elapsed / 3600000, 10);
+        elapsed %= 3600000;
+        var mins = parseInt(elapsed / 60000, 10);
+        elapsed %= 60000;
+        var secs = parseInt(elapsed / 1000, 10);
+        var ms = elapsed % 1000;
+
+        //startTime: startTime, currentTime: new Date().getTime(), interval: options.interval, offset: offset, elapsed: offset + (currentTime - startTime) };
+        $scope.Timesheet.date = (new Date(args.startTime)).toUTCString();
+        $scope.Timesheet.starttime = (new Date(args.startTime)).toUTCString();
+        $scope.Timesheet.endtime = (new Date(args.currentTime)).toUTCString();
+        console.log('logging...' + args.currentTime + ' - ' + (new Date(args.currentTime)) + ' - ' + (new Date(args.currentTime)).toUTCString());
+        $scope.Timesheet.duration = hours + ':' + mins + ':' + secs;
+        $scope.Timesheet.project = $scope.Project.id;
+        $scope.Timesheet.phase = $scope.SelectedPhase;
+        $scope.Timesheet.description = $scope.Description;
+        $scope.Timesheet.worktype = "Project";
+        $scope.Timesheet.employee = $rootScope.globals.currentUser.id;
+        console.log('logging timesheetline: '+$scope.Timesheet);
+        //var employe = "";
+        // A confirm dialog
+        showConfirm();
+
+    });
+
+    showConfirm = function (args) {
+        var confirmPopup = $ionicPopup.confirm({
+            title: 'Create a Timesheet Line?',
+            template: 'Are you still logging time against this task or would you like to create a timesheet line?',
+            cancelText: 'Still Working',
+            okText: 'Create Time Line',
+        });
+
+        confirmPopup.then(function (res) {
+            if (res) {
+                console.log('Lets Create the Timesheet');
+                console.log('project id: '+$scope.Project.Id);
+                console.log('project phase: '+$scope.SelectedPhase);
+                console.log('employee id:' + $scope.Project.employee);
+               
+                var timesheet = {
+                    //fill the timesheet out and send it to the create method.
+                    project: $scope.Timesheet.project,
+                    projectphase: $scope.Timesheet.phase,
+                    employee: $scope.Timesheet.employee,
+                    date: $scope.Timesheet.date,
+                    starttime: $scope.Timesheet.starttime,
+                    endtime: $scope.Timesheet.endtime,
+                    duration: $scope.Timesheet.duration,
+                    description: $scope.Timesheet.description,
+                    worktype: $scope.Timesheet.worktype
+                }
+
+                timesheetService.createTimesheet(timesheet);
+
+                //update the current project record
+                $scope.Project = projectService.getProject($stateParams.Id, true);
+
+                //options.resetTimer();
+                //options.showreset = false;
+            } else {
+                console.log('Dont Create the Timesheet');
+            }
+        });
+    };
 })
 
 .controller('supportTimeCaptureDetailsCtrl', function ($scope) {
-
-})
-
-.controller('supportTimeCaptureNotesCtrl', function ($scope) {
-
-})
-
-.controller('opportunityTimeCaptureDetailsCtrl', function ($scope) {
-
-})
-
-.controller('nominalTimeCaptureDetailsCtrl', function ($scope, $stateParams, nominalService) {
-    nominalService.getNominal($stateParams.Id).then(function (Nominal) {
-        $scope.Nominal = Nominal;
+    supportService.getSupport($stateParams.Id).then(function (Ticket) {
+        $scope.Ticket = Ticket;
+        console.log($scope.Ticket);
     });
 })
 
-.controller('projectTimeCaptureLogTimeCtrl', function ($scope) {
+.controller('supportTimeCaptureNotesCtrl', function ($scope, StopwatchFactory) {
 
 })
 
-.controller('supportTimeCaptureLogTimeCtrl', function ($scope) {
+.controller('opportunityTimeCaptureDetailsCtrl', function ($scope, $stateParams, opportunityService, StopwatchFactory) {
+    console.log($stateParams.Id);
+    opportunityService.getOpportunity($stateParams.Id).then(function (Opportunity) {
+        $scope.Opportunity = Opportunity;
+        console.log($scope.Opportunity);
+    });
+})
+
+.controller('nominalTimeCaptureDetailsCtrl', function ($scope, $stateParams, nominalService, StopwatchFactory) {
+    nominalService.getNominal($stateParams.Id).then(function (Nominal) {
+        $scope.Nominal = Nominal;
+        console.log($scope.Nominal);
+    });
+})
+
+.controller('projectTimeCaptureLogTimeCtrl', function ($scope, $stateParams, projectService, StopwatchFactory) {
+    $scope.Project = projectService.getProject($stateParams.Id);
+})
+
+.controller('supportTimeCaptureLogTimeCtrl', function ($scope, StopwatchFactory) {
 
 })
 
-.controller('opportunityTimeCaptureLogTimeCtrl', ['$scope', function ($scope) {
+.controller('opportunityTimeCaptureLogTimeCtrl', ['$scope', function ($scope, StopwatchFactory) {
 
 }])
 
-.controller('nominalTimeCaptureLogTimeCtrl', function ($scope, $stateParams, nominalService, $ionicPopup) {
+.controller('nominalTimeCaptureLogTimeCtrl', function ($scope, $stateParams, nominalService, $ionicPopup, StopwatchFactory) {
     //default the use Timer Toggle to true
     $scope.UseTimer = true;
     $scope.stopwatches = [{ log: [] }];
@@ -196,7 +362,7 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
             for (var i = 0; i < Nominals.length; i++) {
                 var Nominal = Nominals[i];
                 if (query) {
-                    if (letterMatch.test(Nominal.name.substring(0, query.length))) {
+                    if (letterMatch.test(Nominal.intellic_name.substring(0, query.length))) {
                         filtered.push(Nominal);
                     }
                 } else {
@@ -216,7 +382,7 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
             for (var i = 0; i < Projects.length; i++) {
                 var Project = Projects[i];
                 if (query) {
-                    if (letterMatch.test(Project.name.substring(0, query.length))) {
+                    if (letterMatch.test(Project.intellic_name.substring(0, query.length))) {
                         filtered.push(Project);
                     }
                 } else {

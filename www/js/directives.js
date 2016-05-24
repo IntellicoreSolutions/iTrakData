@@ -11,6 +11,7 @@ angular.module('app.directives', ['Authentication'])
     }
 }])
 
+
 .directive('blankDirective', [function(){
 
 }]);

@@ -1,6 +1,6 @@
 ﻿angular.module('stopWatchApp', [])
-.controller('stopWatchDemoCtrl', ['$scope', 'nominalService', function ($scope, nominalService) {
-    $scope.stopwatches = [{ log: [] }];
+.controller('stopWatchDemoCtrl', ['$scope', function ($scope) {
+    $scope.stopwatch = { log: [] };
 }])
 
 
@@ -16,7 +16,7 @@
             var secs = parseInt(elapsed / 1000, 10);
             var ms = elapsed % 1000;
 
-            return hours + ':' + mins + ':' + secs + ':' + ms;
+            return hours + ':' + mins + ':' + secs;// + ':' + ms;
         }
     };
 })
@@ -36,7 +36,7 @@
         }
     };
 }])
-.factory('StopwatchFactory', ['$interval','$ionicPopup', function ($interval, $ionicPopup) {
+.factory('StopwatchFactory', ['$interval','$ionicPopup', '$rootScope', function ($interval, $ionicPopup, $rootScope) {
     return function (options) {
 
         var startTime = 0,
@@ -46,7 +46,7 @@
             self = this;
 
         if (!options.interval) {
-            options.interval = 100;
+            options.interval = 1000;//was 100
         }
 
         options.elapsedTime = new Date(0);
@@ -72,6 +72,10 @@
                 interval = $interval(self.updateTime, options.interval);
                 options.running = true;
                 options.showreset = false;
+
+                //broadcast to any interested controllers that the timer has been stopped.
+                var tableForm = { startTime: startTime, currentTime: new Date().getTime(), interval: options.interval, offset: offset, elapsed: currentTime - startTime };
+                $rootScope.$broadcast("ic-stopwatch-started", tableForm);
             }
         };
 
@@ -85,41 +89,24 @@
             $interval.cancel(interval);
             options.running = false;
             options.showreset = true;
-            self.showConfirm();
+            
+            //broadcast to any interested controllers that the timer has been stopped.
+            var tableForm = { startTime: startTime, currentTime: currentTime, interval: options.interval, offset: offset, elapsed: currentTime - startTime };
+            $rootScope.$broadcast("ic-stopwatch-stopped", tableForm);
         };
 
         self.resetTimer = function () {
             startTime = new Date().getTime();
             options.elapsedTime.setTime(0);
             timeElapsed = offset = 0;
+            $rootScope.$broadcast("ic-stopwatch-reset");
         };
 
         self.cancelTimer = function () {
             $interval.cancel(interval);
         };
 
-        // A confirm dialog
-        self.showConfirm = function () {
-            var confirmPopup = $ionicPopup.confirm({
-                title: 'Create a Timesheet Line?',
-                template: 'Are you still logging time against this task or would you like to create a timesheet line?',
-                cancelText: 'Still Working',
-                okText: 'Create Time Line',
-            });
-
-            confirmPopup.then(function (res) {
-                if (res) {
-                    console.log('Lets Create the Timesheet');
-                    self.resetTimer();
-                    options.showreset = false;
-                } else {
-                    console.log('Dont Create the Timesheet');
-                }
-            });
-        };
         return self;
 
     };
-
-
 }]);

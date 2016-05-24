@@ -8,7 +8,7 @@
         </form>
         <ion-list id="tickets-list17" class=" " show-delete="false" can-swipe="true" >
             <ion-item class="item-icon-right  " id="tickets-list-item39" ui-sref="tabsController.supportTimeCaptureDetails" collection-repeat="Ticket in Tickets | orderBy:'name' | searchTickets:search" ng-click='projectClick($event)' ui-sref="tabsController.ticketTimeCaptureDetails({ Id: Ticket.alpha2_code })">
-                {{Ticket.name}} - {{Ticket.alpha2_code}} - {{Ticket.alpha3_code}}
+                {{Ticket.name}}
                 <ion-option-button class="button-light icon ion-heart"></ion-option-button>
                 <ion-option-button class="button-light icon ion-email"></ion-option-button>
             </ion-item>

@@ -12,31 +12,43 @@ angular.module('Authentication',[])
             console.log('username: '+username + ' - password: ' + password);
             /* Dummy authentication for testing, uses $timeout to simulate api call
              ----------------------------------------------*/
-            $timeout(function () {
-                var response = { success: username === 'test' && password === 'test' };
-                if (!response.success) {
-                    response.message = 'Username or password is incorrect';
-                }
-                callback(response);
-            }, 1000);
+            //$timeout(function () {
+            //    var response = { success: username === 'barry.booth@intellicore.co.uk' && password === 'BJB5_1st3b' };
+            //    if (!response.success) {
+            //        response.message = 'Username or password is incorrect';
+            //    }
+            //    console.log(response);
+            //    callback(response);
+            //}, 1000);
 
 
             /* Use this for real authentication
              ----------------------------------------------*/
-            //$http.post('/api/authenticate', { username: username, password: password })
-            //    .success(function (response) {
-            //        callback(response);
-            //    });
+            $http.post('http://localhost:5562/crmapi/authenticate', { username: username, password: password })
+              .success(function (response) {
+                  if (!response.success) {
+                      response.message = 'Username or password is incorrect';
+                  }
+                  else {
+                      console.log('authentication successful, response: ' + response);
+
+                  }
+                  callback(response);
+                  
+                  //Log the employeeID in the local storage for later.
+
+                });
 
         };
 
-        service.SetCredentials = function (username, password) {
+        service.SetCredentials = function (username, password, id) {
             var authdata = Base64.encode(username + ':' + password);
-
+            console.log('---'+ username + ':' + password + 'id:'+id);
             $rootScope.globals = {
                 currentUser: {
                     username: username,
-                    authdata: authdata
+                    authdata: authdata,
+                    id: id
                 }
             };
 

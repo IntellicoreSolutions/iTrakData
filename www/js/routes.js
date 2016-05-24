@@ -72,7 +72,7 @@ angular.module('app.routes', [])
   })
 
   .state('tabsController.projectTimeCaptureDetails', {
-      url: '/project-details',
+      url: '/project-details/:Id',
       //requireADLogin: true,
     views: {
       'tab2': {
@@ -83,7 +83,7 @@ angular.module('app.routes', [])
   })
 
   .state('tabsController.supportTimeCaptureDetails', {
-      url: '/support-details',
+      url: '/support-details/:Id',
       //requireADLogin: true,
     views: {
       'tab5': {
@@ -94,7 +94,7 @@ angular.module('app.routes', [])
   })
 
   .state('tabsController.supportTimeCaptureNotes', {
-      url: '/support-notes',
+      url: '/support-notes/:Id',
       //requireADLogin: true,
     views: {
       'tab5': {
@@ -105,7 +105,7 @@ angular.module('app.routes', [])
   })
 
   .state('tabsController.opportunityTimeCaptureDetails', {
-      url: '/opportunity-details',
+      url: '/opportunity-details/:Id',
       //requireADLogin: true,
     views: {
       'tab4': {
@@ -127,7 +127,7 @@ angular.module('app.routes', [])
   })
 
   .state('tabsController.projectTimeCaptureLogTime', {
-      url: '/project-time',
+      url: '/project-time/:Id',
       //requireADLogin: true,
     views: {
       'tab2': {
@@ -138,7 +138,7 @@ angular.module('app.routes', [])
   })
 
   .state('tabsController.supportTimeCaptureLogTime', {
-      url: '/support-time',
+      url: '/support-time/:Id',
       //requireADLogin: true,
     views: {
       'tab5': {
@@ -149,7 +149,7 @@ angular.module('app.routes', [])
   })
 
   .state('tabsController.opportunityTimeCaptureLogTime', {
-      url: '/opportunity-time',
+      url: '/opportunity-time/:Id',
       //requireADLogin: true,
     views: {
       'tab4': {

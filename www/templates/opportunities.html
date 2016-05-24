@@ -7,8 +7,8 @@
             </label>
         </form>
         <ion-list id="opportunities-list15" class=" " show-delete="false" can-swipe="true">
-            <ion-item class="item-icon-right  " id="opportunities-list-item33" collection-repeat="Opportunity in Opportunities | orderBy:'name' | searchOpportunities:search" ng-click='opportunityClick($event)' ui-sref="tabsController.opportunityTimeCaptureDetails({Id: Opportunity.alpha2_code})">
-                {{Opportunity.name}} - {{Opportunity.alpha2_code}} - {{Opportunity.alpha3_code}}
+            <ion-item class="item-icon-right  " id="opportunities-list-item33" collection-repeat="Opportunity in Opportunities | orderBy:'name' | searchOpportunities:search" ng-click='opportunityClick($event)' data-ui-sref="tabsController.opportunityTimeCaptureDetails({Id: Opportunity.id})">
+                {{Opportunity.name}}
                 <ion-option-button class="button-light icon ion-heart"></ion-option-button>
                 <ion-option-button class="button-light icon ion-email"></ion-option-button>
             </ion-item>

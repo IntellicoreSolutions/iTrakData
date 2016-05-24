@@ -6,9 +6,13 @@
                 <input type="search" placeholder="" ng-model="search">
             </label>
         </form>
+        <ion-refresher
+    pulling-text="Pull to refresh..."
+    on-refresh="doRefresh()">
+  </ion-refresher>
         <ion-list id="projects-list1" class=" "  show-delete="false" can-swipe="true">
-            <ion-item class="item-icon-left item-icon-right  " id="projects-list-item2" collection-repeat="Project in Projects | orderBy:'name' | searchProjects:search" ng-click='projectClick($event)' ui-sref="tabsController.projectTimeCaptureDetails({ Id: Project.alpha2_code })">
-                {{Project.name}} - {{Project.alpha2_code}} - {{Project.alpha3_code}}
+            <ion-item class="item-icon-left item-icon-right  " id="projects-list-item2" collection-repeat="Project in Projects | orderBy:'intellic_name' | searchProjects:search" ng-click="setProject(Project)" data-ui-sref="tabsController.projectTimeCaptureDetails({ Id: Project.id })">
+                {{Project.intellic_name}}
                 <ion-option-button class="button-light icon ion-heart"></ion-option-button>
                 <ion-option-button class="button-light icon ion-email"></ion-option-button>
             </ion-item>

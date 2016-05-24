@@ -1,38 +1,122 @@
 <ion-view title="Project Time Capture - Details" id="page11" class=" ">
-    <ion-content padding="true" class="has-header">
-        <h1 id="projectTimeCaptureDetails-heading1" style="color:#000000;text-align:center;" class=" ">QA Travel</h1>
-        <div id="projectTimeCaptureDetails-button-bar1" class=" button-bar ">
+    <ion-content padding="true" class="has-header" scroll="false">
+        <h3 id="projectTimeCaptureDetails-heading1" style="color:#000000;text-align:center;" class=" ">{{Project.intellic_customer}}-{{Project.intellic_name}}</h3>
+        <h5 id="H1" style="color:#000000;text-align:center;" class=" ">{{Project.intellic_projectidentification}}</h5>
+        <!--<div id="projectTimeCaptureDetails-button-bar1" class=" button-bar ">
             <button id="projectTimeCaptureDetails-button4" class=" button button-dark  button-block ">Details</button>
             <a ui-sref="tabsController.projectTimeCaptureLogTime" id="projectTimeCaptureDetails-button5" class=" button button-light  button-block button-outline ">Log Time</a>
-        </div>
-        <div>
-            <p>Estimated
-                <b>£8,500</b>
-                <br>Billed:
-                <b>£2,500</b>
-                <br>To be Invoiced
-                <b>£1,500</b>
-                <br>Outstanding
-                <b>£4,500</b>
-            </p>
-            <br>
-            <br>Plan &amp; Design: Quoted
-            <b>16 hrs</b>- Used
-            <b>2 hrs</b>
-            <br>Development: Quoted
-            <b>16 hrs</b>- Used
-            <b>2 hrs</b>
-            <br>Testing: Quoted
-            <b>16 hrs</b>- Used
-            <b>2 hrs</b>
-            <br>Training: Quoted
-            <b>16 hrs</b>- Used
-            <b>2 hrs</b>
-            <br>Project Man: Quoted
-            <b>16 hrs</b>- Used
-            <b>2 hrs</b>
-            <br>
-            <p></p>
-        </div>
+        </div>-->
+        <tab-slide-box tab="0">
+			    	<div class="tsb-icons">
+			    		<div class="tsb-ic-wrp">
+							<a href="javascript:;" class="ion-home"></a>
+							<a href="javascript:;" class="ion-email"></a>
+							<a href="javascript:;" class="ion-person"></a>
+						</div>
+			    	</div>
+			        <ion-slide-box show-pager="false" on-slide-changed="slideHasChanged($index)">
+			            <ion-slide style="height:100%">
+			                <h2>Project Details</h2>
+                                <ion-scroll style="height:375px" delegate-handle="slide1Scroll">
+                                    <div style="height:375px">
+                                        <table style="text-align:left">
+                                            <tr>
+                                                <td colspan="2">
+                                                    Customer<b> {{Project.intellic_customer}}</b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Estimated: <b>&#163{{Project.intellic_projectvalue}}</b>
+                                                </td>
+                                                <td>
+                                                    Billed: <b>&#163{{Project.intellic_billedtodate}}</b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    Description: <b>{{Project.intellic_description}}</b>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <br />
+                                        <h5>Project Phase Overview</h5>
+                                        <ion-list id="projectTimeCaptureLogTime-list8" class=" " show-delete="false" can-swipe="true">
+                                            <ion-item id="projectTimeCaptureLogTime-list-item21" class="  " collection-repeat="Phase in Project.project_phases | orderBy:'intellic_projectphasecategory'">
+                                                <h3>{{Phase.intellic_projectphasecategory}}<br />
+                                                <b>Quoted:</b> {{Phase.intellic_quotedquantity}} - <b>Time Applied:</b> {{Phase.intellic_timeapplied}} - <b>Left:</b> {{Phase.intellic_quotedquantity - Phase.timeapplied}}<br /><b>Billed:</b> {{Phase.intellic_billedtodate}} - <b>UnBilled:</b> {{Phase.intellic_timeapplied - Phase.intellic_billedtodate}}</h3>
+                                            </ion-item>
+                                        </ion-list>
+                                    </div>
+                                </ion-scroll>
+                                    
+                        </ion-slide>
+			            <ion-slide>
+			                <h2>Time Tracker</h2>
+                            <form id="timeForm" class="list ">
+                                <label class="item item-select " id="projectTimeCaptureLogTime-select1" name="Project Phase">
+                                    <span class="input-label">Select</span>
+                                    <select ng-model="SelectedPhase">
+                                        <option ng-repeat="option in Project.project_phases" value="{{option.id}}">{{option.intellic_projectphasecategory}}</option>
+                                    </select>
+                                </label>
+                                <label class="item item-input " id="nominalTimeCaptureLogTime-textarea2">
+                                    <span class="input-label" ng-model="Description">Description</span><textarea placeholder="" required> </textarea>
+                                </label>
+                                <ion-toggle toggle-class="toggle-positive" id="nominalTimeCaptureLogTime-toggle3" class=" " ng-model="UseTimer" ng-clicked="UserTimerToggled()">Timer Input</ion-toggle>
+                            </form>
+
+                            <div ng-app="stopWatchApp" ng-controller="stopWatchDemoCtrl" ng-show="UseTimer">
+                                <div ng-repeat="options in stopwatch"> 
+                                    <div bb-stopwatch options="options">
+                                        <div class="container">
+                                            <div>
+                                            <h1 id="H2" style="color:#000000;text-align:center;" class="stopWatch numbers">{{options.elapsedTime | stopwatchTime}}</h1>
+                                            </div>
+                                            <button id="nominal-log-start" ng-hide="options.running" class=" button button-balanced  button-block " ng-click="startTimer()">Start</button>
+                                            <button id="nominal-log-stop" ng-show="options.running" class=" button button-balanced  button-block " ng-click="stopTimer()">Stop</button>
+                                            <button id="nominal-log-reset" ng-show="options.showreset" class=" button button-balanced  button-block " ng-click="resetTimer()">Reset</button>
+                                       </div>
+                                   </div>
+                                </div>
+                            </div>
+
+                            <ion-list id="nominalTimeCaptureLogTime-list9" class=" " ng-hide="UseTimer">
+                                <label class="item item-input " id="nominalTimeCaptureLogTime-input4">
+                                    <span class="input-label">From</span>
+                                    <input type="date">
+                                    <input type="time">
+                                </label>
+                                <label class="item item-input " id="nominalTimeCaptureLogTime-input6">
+                                    <span class="input-label">To</span>
+                                    <input type="date">
+                                    <input type="time">
+                                </label>
+                                <button id="Button1" class=" button button-balanced  button-block " ng-click="createTimeLine()">Create Time Line</button>
+                            </ion-list>
+			            </ion-slide>
+			            <ion-slide>
+			                <h2>Previous Timesheet Lines</h2>        
+                            <section id="cd-timeline" class="cd-container">
+                                <div id="Div1" class="" ng-repeat="Timeline in Project.timesheetlines | orderBy:['-date']" class="cd-timeline-icon dark">
+                                    <div class="cd-timeline-block">
+                                        <!-- CUSTOMIZE YOUR STYLE USING DEFAULT IONIC VALUES SUCH AS POSITIVE, CALM, BALANCED,... -->
+                                        <div class="cd-timeline-icon text-center dark">
+                                          <i class="ion-image timelineIcon" ng-if="(Timeline.approvalstatus=='Draft')"></i>
+                                          <i class="ion-ios-videocam timelineIcon" ng-if="Timeline.approvalstatus=='Engineer Approved' "></i>
+                                          <i class="ion-location timelineIcon" ng-if="Timeline.approvalstatus=='Manager Approved'"></i>
+                                        </div>
+                                        <!-- CUSTOMIZE YOUR STYLE USING DEFAULT IONIC VALUES SUCH AS POSITIVE, CALM, BALANCED,... -->
+                                        <div class="cd-timeline-content padding dark">
+            	                            <h5 class="marginBottom0 marginTop0">{{Timeline.duration}} hours</h5>
+            	                            <p class="marginTop5 cd-author">by {{Timeline.employee}} on {{Timeline.date | date: "dd MM yyyy : hh mm"}}</p>
+            	                            <p class="timelineText">{{Timeline.description | limitTo: 100}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+			            </ion-slide>
+                    </ion-slide-box>
+                </tab-slide-box>
     </ion-content>
 </ion-view>
