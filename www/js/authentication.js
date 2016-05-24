@@ -52,7 +52,7 @@ angular.module('Authentication',[])
                 }
             };
 
-            $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
+            $http.defaults.headers.common['Authorization'] = 'Basic' + authdata; // jshint ignore:line
             //$cookieStore.put('globals', $rootScope.globals);
             window.localStorage.setItem("globals", $rootScope.globals);
         };
@@ -61,7 +61,7 @@ angular.module('Authentication',[])
             $rootScope.globals = {};
             //$cookieStore.remove('globals');
             window.localStorage.setItem("globals", null);
-            $http.defaults.headers.common.Authorization = 'Basic ';
+            $http.defaults.headers.common.Authorization = 'Basic';
         };
 
         return service;
