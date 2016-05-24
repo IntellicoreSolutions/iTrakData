@@ -117,7 +117,7 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
     };
 })
 
-.controller('loginCtrl', ['$scope', '$rootScope', '$location', '$state', 'AuthenticationService', function ($scope, $rootScope, $location, $state, AuthenticationService) {
+.controller('loginCtrl', ['$scope', '$rootScope', '$location', '$state', 'AuthenticationService', '$ionicLoading', function ($scope, $rootScope, $location, $state, AuthenticationService, $ionicLoading) {
         
     $scope.user = {};
     $scope.user.username = "barry.booth@intellicore.co.uk";
@@ -126,6 +126,18 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
         // reset login status
         AuthenticationService.ClearCredentials();
 
+        $scope.show = function () {
+            $ionicLoading.show({
+                template: '<p>Loading...</p><ion-spinner></ion-spinner>'
+            });
+        };
+
+        $scope.hide = function () {
+            $ionicLoading.hide();
+        };
+
+        $scope.show($ionicLoading);
+
         $scope.login = function () {
 
             $scope.dataLoading = true;
@@ -133,6 +145,8 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
                 if (response.success) {
                     console.log('authentication successful');
                     AuthenticationService.SetCredentials($scope.user.username, $scope.user.password, response.ID);
+                    $scope.hide($ionicLoading);
+                    
                     $state.go('landingPage');
 
                 } else {
