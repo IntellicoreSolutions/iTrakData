@@ -70,14 +70,19 @@ h1 {
 }
 
 .box {
-    display: inline-block;
-    position: relative;
-    width: 175px;
-    height: 175px;
-    z-index: 0;
-    margin: 2px auto 2px auto;
-    transition: all .15s ease-in-out;
+    /*display: inline-block;*/
+    /*position: relative;*/
+    /*width: 175px;*/
+    /*height: 175px;*/
+    /*z-index: 0;*/
+    /*margin: 2px auto 2px auto;*/
+    /*transition: all .15s ease-in-out;*/
+    /*text-align: center;*/
+    width: calc(100% / 2 - 3px);
     text-align: center;
+    height: 175px;
+    margin-bottom: 5px;
+    display: inline-block;
 }
 
 /* The ghost, nudged to maintain perfect centering */
@@ -86,7 +91,7 @@ h1 {
   display: inline-block;
   height: 100%;
   vertical-align: middle;
-  margin-right: -0.25em; /* Adjusts for spacing */
+  /*margin-right: -0.25em; !* Adjusts for spacing *!*/
 }
 
 .box:hover {
@@ -138,4 +143,13 @@ fg-blue {
 
 .side-menu {
 
+}
+
+.login_button {
+    padding: 10px;
+}
+
+.login_button .activated {
+    background: #00b0b7 !important;
+    color:#fff !important;
 }
