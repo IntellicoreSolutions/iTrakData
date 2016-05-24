@@ -136,7 +136,7 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
             $ionicLoading.hide();
         };
 
-        $scope.show($ionicLoading);
+        //$scope.show($ionicLoading);
 
         $scope.login = function () {
 
@@ -145,7 +145,7 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
                 if (response.success) {
                     console.log('authentication successful');
                     AuthenticationService.SetCredentials($scope.user.username, $scope.user.password, response.ID);
-                    $scope.hide($ionicLoading);
+                    //$scope.hide($ionicLoading);
                     
                     $state.go('landingPage');
 
