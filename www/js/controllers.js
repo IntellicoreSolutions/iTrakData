@@ -150,7 +150,7 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
                     $state.go('landingPage');
 
                 } else {
-                    $scope.hide($ionicLoading); 
+                    $scope.hide($ionicLoading);
                     $scope.error = response.message;
                     $scope.dataLoading = false;
                 }

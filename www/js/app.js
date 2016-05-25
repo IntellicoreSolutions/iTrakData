@@ -38,18 +38,42 @@ angular.module('Authentication', [])
 //         );
 //}])
 
-.run(['$rootScope', '$location', '$http', '$state',
-    function ($rootScope, $location, $http, $state) {
-        // keep user logged in after page refresh
-        $rootScope.globals = $window.localStorage.get('globals') || {};
-        if ($rootScope.globals.currentUser) {
-            $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
-        }
+    .config(function($stateProvider, $urlRouterProvider) {
+        $stateProvider
 
-        $rootScope.$on('$locationChangeStart', function (event, next, current) {
-            // redirect to login page if not logged in
-            if ($location.path() !== '/login' && !$rootScope.globals.currentUser) {
-                $state.go('login');
-            }
-        });
-    }]);
+            .state('login', {
+                url: '/login',
+                views: {
+                    'page': {
+                        templateUrl: 'templates/login.html',
+                        controller: 'loginCtrl'
+
+                    }
+                }
+            })
+
+
+        // if none of the above states are matched, use this as the fallback
+        $urlRouterProvider.otherwise('/login');
+    })
+
+
+// .run(['$rootScope', '$location', '$http', '$state',
+//     function ($rootScope, $location, $http, $state) {
+//         // keep user logged in after page refresh
+//         $rootScope.globals = $window.localStorage.get('globals') || {};
+//         if ($rootScope.globals.currentUser) {
+//             $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
+//         }
+//
+//         $rootScope.$on('$locationChangeStart', function (event, next, current) {
+//             // redirect to login page if not logged in
+//             if ($location.path() !== '/login' && !$rootScope.globals.currentUser) {
+//                 $state.go('login');
+//             }
+//         });
+//     }]);
+
+
+
+
