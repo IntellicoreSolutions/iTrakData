@@ -24,10 +24,7 @@
     "cordova-plugin-ms-adal"
   ],
   "cordovaPlatforms": [
-    {
-      "platform": "android",
-      "locator": "windows"
-    },
+    "android",
     "ios"
   ]
 }
