@@ -149,7 +149,7 @@ fg-blue {
     padding: 10px;
 }
 
-.login_button .activated {
+.login_button.activated {
     background: #00b0b7 !important;
     color:#fff !important;
 }
