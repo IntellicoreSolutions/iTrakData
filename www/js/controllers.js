@@ -140,19 +140,24 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
 
         $scope.login = function () {
 
+            $scope.show($ionicLoading);
             $scope.dataLoading = true;
             AuthenticationService.Login($scope.user.username, $scope.user.password, function(response) {
                 if (response.success) {
                     console.log('authentication successful');
                     AuthenticationService.SetCredentials($scope.user.username, $scope.user.password, response.ID);
-                    //$scope.hide($ionicLoading);
-                    
+                    $scope.hide($ionicLoading);
                     $state.go('landingPage');
 
                 } else {
+                    $scope.hide($ionicLoading);
                     $scope.error = response.message;
                     $scope.dataLoading = false;
                 }
+
+                // if(response.timeout) {
+                //     alert('timed out');
+                // }
             });
         }
 
