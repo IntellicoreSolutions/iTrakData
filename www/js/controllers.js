@@ -119,7 +119,8 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
         };
     })
 
-    .controller('loginCtrl', ['$scope', '$rootScope', '$location', '$state', 'AuthenticationService', '$ionicLoading', '$ionicSideMenuDelegate', '$window', function ($scope, $rootScope, $location, $state, AuthenticationService, $ionicLoading, $ionicSideMenuDelegate, $window) {
+    .controller('loginCtrl', ['$scope', '$rootScope', '$location', '$state', 'AuthenticationService', '$ionicLoading', '$ionicSideMenuDelegate', '$window', '$timeout', '$ionicPopup',
+        function ($scope, $rootScope, $location, $state, AuthenticationService, $ionicLoading, $ionicSideMenuDelegate, $window, $timeout, $ionicPopup) {
 
         $scope.user = {};
         $scope.user.username = "barry.booth@intellicore.co.uk";
@@ -158,11 +159,18 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
                     $scope.error = response.message;
                     $scope.dataLoading = false;
                 }
-
-                // if(response.timeout) {
-                //     alert('timed out');
-                // }
             });
+
+            //Timeout error
+            $timeout(function() {
+                $scope.hide($ionicLoading);
+                $scope.dataLoading = false;
+
+                var alertPopup = $ionicPopup.alert({
+                    title: 'Timeout Error',
+                    template: 'This was taking too long! Try again later.'
+                });
+            }, 22000);
         }
 
         $scope.logout = function () {

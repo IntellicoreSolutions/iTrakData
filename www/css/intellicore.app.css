@@ -99,16 +99,28 @@ h1 {
     /*margin-right: -0.25em; !* Adjusts for spacing *!*/
 }
 
-.box:hover {
+/*.box:hover {*/
+    /*background: #9CC;*/
+    /*z-index: 100;*/
+    /*transform: scale(1.2, 1.2);*/
+    /*box-shadow: 0 5px 10px 0 rgba(0, 0, 0, .2);*/
+/*}*/
+
+.box.activated {
     background: #9CC;
-    z-index: 100;
-    transform: scale(1.2, 1.2);
-    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, .2);
 }
+
+/*.box.activated .tile-label {*/
+    /*color:#fff;*/
+/*}*/
 
 .tile-content {
     display: inline-block;
     vertical-align: middle;
+}
+
+.tile-label {
+    color:#000;
 }
 
 .icon img {
