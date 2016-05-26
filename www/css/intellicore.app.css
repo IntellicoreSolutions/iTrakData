@@ -11,13 +11,12 @@
 
 .ic_app_background {
   width: 100%;
-  /*height: calc(100% - 79px);*/
-  height: 100%;
+  height: calc(100% - 79px);
   background: url('../img/app_background.jpg');
   background-size: cover !important;
   background-repeat: no-repeat !important;
   background-position: center center !important;
-  /*top: 80px !important;*/
+  top: 80px !important;
 }
 
 .ic_header {
