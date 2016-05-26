@@ -35,7 +35,7 @@ body {
 }
 
 h1 {
-  color: #00b0b7;
+  color: #1abfd3;
   font-weight: lighter;
   font-family: "Poiret One";
   font-size: 50px;
@@ -49,9 +49,9 @@ h1 {
 
 .ic_button {
   background: none;
-  border: 2px solid #00b0b7;
+  border: 2px solid #1abfd3;
   border-radius: 8px;
-  color: #00b0b7;
+  color: #1abfd3;
   cursor: pointer;
   font-size: 17px;
   font-weight: bold;
@@ -114,7 +114,7 @@ h1 {
 
 
 .bg-blue {
-        background: #4BC3D6;
+        background: #1abfd3;
 }
 
 .bg-green {
@@ -138,7 +138,7 @@ fg-white {
 }
 
 fg-blue {
-    color: #00b0b7;
+    color: #1abfd3;
 }
 <!-- landing page -->
 
@@ -151,6 +151,6 @@ fg-blue {
 }
 
 .login_button.activated {
-    background: #00b0b7 !important;
+    background: #1abfd3 !important;
     color:#fff !important;
 }

@@ -1,7 +1,7 @@
 angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
 //angular.module('Authentication')
 
-.controller('projectsCtrl', function ($scope, projectService, $state, StopwatchFactory, $ionicLoading) {
+.controller('projectsCtrl', function ($scope, projectService, $state, StopwatchFactory, $ionicLoading, $ionicSideMenuDelegate) {
     console.log('in projects controller');
 
     $scope.show = function () {
