@@ -38,32 +38,32 @@ angular.module('Authentication', [])
 //         );
 //}])
 
-    .config(function($stateProvider, $urlRouterProvider) {
-        $stateProvider
-
-            .state('login', {
-                url: '/login',
-                views: {
-                    'page': {
-                        templateUrl: 'templates/login.html',
-                        controller: 'loginCtrl'
-
-                    }
-                }
-            })
-
-
-            .state('projects', {
-                url: '/projects',
-                abstract: true,
-                templateUrl: 'templates/menu.html',
-                controller: 'projectsCtrl'
-            })
-
-
-        // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/login');
-    })
+    // .config(function($stateProvider, $urlRouterProvider) {
+    //     $stateProvider
+    //
+    //         .state('login', {
+    //             url: '/login',
+    //             views: {
+    //                 'page': {
+    //                     templateUrl: 'templates/login.html',
+    //                     controller: 'loginCtrl'
+    //
+    //                 }
+    //             }
+    //         })
+    //
+    //
+    //         .state('projects', {
+    //             url: '/projects',
+    //             abstract: true,
+    //             templateUrl: 'templates/menu.html',
+    //             controller: 'projectsCtrl'
+    //         })
+    //
+    //
+    //     // if none of the above states are matched, use this as the fallback
+    //     $urlRouterProvider.otherwise('/login');
+    // })
 
 
 .run(['$rootScope', '$location', '$http', '$state',

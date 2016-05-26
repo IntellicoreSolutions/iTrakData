@@ -1,45 +1,54 @@
 ﻿.ic_header_icon {
-  background: url('../img/IC-logo-main-bkg.png');
-  background-size: 100% auto !important;
-  background-repeat: no-repeat;
-  width: 170px;
-  height: 48px;
-  margin-left: auto;
-  margin-right: auto;
-  vertical-align: central;
+    background: url('../img/IC-logo-main-bkg.png');
+    background-size: 100% auto !important;
+    background-repeat: no-repeat;
+    width: 170px;
+    height: 48px;
+    margin-left: auto;
+    margin-right: auto;
+    vertical-align: central;
 }
 
 .ic_app_background {
-  width: 100%;
-  height: calc(100% - 79px);
-  background: url('../img/app_background.jpg');
-  background-size: cover !important;
-  background-repeat: no-repeat !important;
-  background-position: center center !important;
-  top: 80px !important;
+    width: 100%;
+    /*height: calc(100% - 79px);*/
+    height: 100%;
+    background: url('../img/app_background.jpg');
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    /*top: 80px !important;*/
 }
 
 .ic_header {
-  background: #fff !important;
-  height: 80px !important;
+    background: #fff !important;
+    height: 80px !important;
+}
+
+.platform-android .ic_header, .platform-browser .ic_header  {
+    height: 60px !important;
+}
+
+.platform-android .has-subheader, .platform-browser .has-subheader  {
+    top: 60px;
 }
 
 @font-face {
-  font-family: 'Poiret One';
-  src: url('../fonts/PoiretOne-Regular.ttf');
+    font-family: 'Poiret One';
+    src: url('../fonts/PoiretOne-Regular.ttf');
 }
 
 body {
-  font-family: "Poiret One";
+    font-family: "Poiret One";
 }
 
 h1 {
-  color: #1abfd3;
-  font-weight: lighter;
-  font-family: "Poiret One";
-  font-size: 50px;
-  text-align: left;
-  margin-bottom: 30px;
+    color: #1abfd3;
+    font-weight: lighter;
+    font-family: "Poiret One";
+    font-size: 50px;
+    text-align: left;
+    margin-bottom: 30px;
 }
 
 .ic_login-content {
@@ -47,23 +56,19 @@ h1 {
 }
 
 .ic_button {
-  background: none;
-  border: 2px solid #1abfd3;
-  border-radius: 8px;
-  color: #1abfd3;
-  cursor: pointer;
-  font-size: 17px;
-  font-weight: bold;
-  margin-bottom: 15px;
-  margin-left: 10px;
-  margin-right: 10px;
-  width: 95%;
+    background: none;
+    border: 2px solid #1abfd3;
+    border-radius: 8px;
+    color: #1abfd3;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 95%;
 }
 
-
-
-
-<!-- latest -->
 .wrapper {
     max-width: 620px;
     height: auto;
@@ -87,33 +92,32 @@ h1 {
 
 /* The ghost, nudged to maintain perfect centering */
 .box:before {
-  content: '';
-  display: inline-block;
-  height: 100%;
-  vertical-align: middle;
-  /*margin-right: -0.25em; !* Adjusts for spacing *!*/
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    /*margin-right: -0.25em; !* Adjusts for spacing *!*/
 }
 
 .box:hover {
     background: #9CC;
     z-index: 100;
-    transform: scale(1.2,1.2);
-    box-shadow: 0 5px 10px 0 rgba(0,0,0,.2);
+    transform: scale(1.2, 1.2);
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, .2);
 }
 
 .tile-content {
-  display: inline-block;
-  vertical-align: middle;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .icon img {
-    background-color:transparent;
-    margin-bottom:10px;
+    background-color: transparent;
+    margin-bottom: 10px;
 }
 
-
 .bg-blue {
-        background: #1abfd3;
+    background: #1abfd3;
 }
 
 .bg-green {
@@ -125,21 +129,21 @@ h1 {
 }
 
 .bg-transparent {
-    background-color:transparent;
+    background-color: transparent;
 }
 
-fg-black {
-    color: black;
-}
+/*fg-black {*/
+/*color: black;*/
+/*}*/
 
-fg-white {
-    color: white;
-}
+/*fg-white {*/
+/*color: white;*/
+/*}*/
 
-fg-blue {
-    color: #1abfd3;
-}
-<!-- landing page -->
+/*fg-blue {*/
+/*color: #1abfd3;*/
+/*}*/
+/* */
 
 .side-menu {
 
@@ -151,5 +155,10 @@ fg-blue {
 
 .login_button.activated {
     background: #1abfd3 !important;
-    color:#fff !important;
+    color: #fff !important;
 }
+.skip {
+    position: absolute;
+    bottom: 25px;
+}
+
