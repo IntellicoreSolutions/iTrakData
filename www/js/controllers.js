@@ -402,6 +402,7 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
     .controller('landingPageCtrl', ['$scope', '$ionicSideMenuDelegate', function ($scope, $ionicSideMenuDelegate) {
         $ionicSideMenuDelegate.canDragContent(false);
         //$ionicSideMenuDelegate.toggleLeft();
+        
     }])
 
 
