@@ -24,7 +24,7 @@
     "cordova-plugin-ms-adal"
   ],
   "cordovaPlatforms": [
-    "android",
-    "ios"
+    "ios",
+    "android"
   ]
 }

@@ -1,7 +1,7 @@
 angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
 //angular.module('Authentication')
 
-    .controller('projectsCtrl', function ($scope, projectService, $state, StopwatchFactory, $ionicLoading, $ionicSideMenuDelegate) {
+    .controller('projectsCtrl', function ($scope, projectService, $state, StopwatchFactory, $ionicLoading, $ionicSideMenuDelegate, $timeout, $ionicPopup) {
         console.log('in projects controller');
 
         $ionicSideMenuDelegate.canDragContent(false);
@@ -24,6 +24,18 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
             // On both cases hide the loading
             $scope.hide($ionicLoading);
         });
+
+
+        //Timeout error
+        $timeout(function() {
+            $scope.hide($ionicLoading);
+            $scope.dataLoading = false;
+
+            var alertPopup = $ionicPopup.alert({
+                title: 'Timeout Error',
+                template: 'This was taking too long! Try again later.'
+            });
+        }, 22000);
 
         //$scope.projectClick = function loadProject(clickEvent) {
         //    $scope.clickEvent = simpleKeys(clickEvent);

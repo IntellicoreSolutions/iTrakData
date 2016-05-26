@@ -9,7 +9,7 @@ angular.module('app.routes', [])
   $stateProvider
     
   .state('tabsController', {
-    url: '/page1',
+    url: '/tabs',
     templateUrl: 'templates/tabsController.html',
     abstract: true,
     //requireADLogin: true,

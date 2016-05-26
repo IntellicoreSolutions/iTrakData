@@ -174,3 +174,7 @@ h1 {
     bottom: 25px;
 }
 
+.platform-ios .scroll {
+    height:100%;
+}
+
