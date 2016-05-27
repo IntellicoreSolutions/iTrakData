@@ -43,7 +43,7 @@
 }
 
 body {
-    font-family: "Poiret One";
+    /*font-family: "Poiret One";*/
 }
 
 h1 {
@@ -179,9 +179,9 @@ h1 {
     bottom: 25px;
 }
 
-.platform-ios .scroll {
-    height:100%;
-}
+/*.platform-ios .scroll {*/
+    /*height:100%;*/
+/*}*/
 
 .back_landing_button {
     font-size: 22px;
@@ -190,4 +190,42 @@ h1 {
     color: #444;
     text-decoration: none;
 }
+
+.project_table {
+    font-size: 16px;
+}
+
+.project_table tr td {
+    padding: 7px 0;
+}
+
+.slider-slide h2 {
+    text-align: left !important;
+    font-size: 18px;
+}
+.slider-slide h4 {
+    font-size: 16px;
+    display: inline-block;
+}
+
+
+.tab-item.tab-item-active, .tab-item.active, .tab-item.activated {
+    //color: #1abfd3 !important;
+    border-color: #1abfd3 !important;
+}
+
+.tab_background {
+    background-color:#ededed;
+}
+
+/*.list .item-content {*/
+    /*padding-left: 15px !important;*/
+/*}*/
+
+.tab_background h3 {
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 

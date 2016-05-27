@@ -1,5 +1,5 @@
 <ion-view title="Projects" hide-back-button="true" id="page5" class=" " >
-    <ion-content padding="true" class="has-header" >
+    <ion-content padding="true" class="has-header tab_background">
         <form id="projects-form1" class="list ">
             <label class="item item-input">
                 <i class="icon ion-search placeholder-icon"></i>
@@ -7,8 +7,8 @@
             </label>
         </form>
         <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"></ion-refresher>
-        <ion-list id="projects-list1" class=" " show-delete="false" can-swipe="true">
-            <ion-item class="item-icon-left item-icon-right  " id="projects-list-item2"
+        <ion-list id="projects-list1" show-delete="false" can-swipe="true">
+            <ion-item class="" id="projects-list-item2"
                       collection-repeat="Project in Projects | orderBy:'intellic_name' | searchProjects:search"
                       ng-click="setProject(Project)"
                       data-ui-sref="tabsController.projectTimeCaptureDetails({ Id: Project.id })">

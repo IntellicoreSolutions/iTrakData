@@ -1,5 +1,5 @@
 <ion-view title="Project Time Capture - Details" id="page11" class=" ">
-    <ion-content padding="true" class="has-header" scroll="false">
+    <ion-content padding="true" class="has-header tab_background" scroll="false">
         <h3 id="projectTimeCaptureDetails-heading1" style="color:#000000;text-align:center;" class=" ">{{Project.intellic_customer}}-{{Project.intellic_name}}</h3>
         <h5 id="H1" style="color:#000000;text-align:center;" class=" ">{{Project.intellic_projectidentification}}</h5>
         <!--<div id="projectTimeCaptureDetails-button-bar1" class=" button-bar ">
@@ -14,28 +14,28 @@
 							<a href="javascript:;" class="ion-person"></a>
 						</div>
 			    	</div>
-			        <ion-slide-box show-pager="false" on-slide-changed="slideHasChanged($index)">
+			        <ion-slide-box show-pager="true" on-slide-changed="slideHasChanged($index)">
 			            <ion-slide style="height:100%">
 			                <h2>Project Details</h2>
                                 <ion-scroll style="height:375px" delegate-handle="slide1Scroll">
                                     <div style="height:375px">
-                                        <table style="text-align:left">
+                                        <table style="text-align:left" class="project_table">
                                             <tr>
                                                 <td colspan="2">
-                                                    Customer<b> {{Project.intellic_customer}}</b>
+                                                    <h4>Customer:</h4> {{Project.intellic_customer}}
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    Estimated: <b>&#163{{Project.intellic_projectvalue}}</b>
+                                                    <h4>Estimated:</h4> &#163{{Project.intellic_projectvalue}}
                                                 </td>
                                                 <td>
-                                                    Billed: <b>&#163{{Project.intellic_billedtodate}}</b>
+                                                    <h4>Billed:</h4> &#163{{Project.intellic_billedtodate}}
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2">
-                                                    Description: <b>{{Project.intellic_description}}</b>
+                                                    <h4>Description:</h4> <br>{{Project.intellic_description}}
                                                 </td>
                                             </tr>
                                         </table>

@@ -1,6 +1,16 @@
 angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
 //angular.module('Authentication')
 
+    .controller('AppController', function($scope) {
+        //alert(window.localStorage.getItem("globals"));
+
+        //alert(window.localStorage.getItem("username"));
+        //alert(window.localStorage.getItem("password"));
+
+
+
+    })
+
     .controller('projectsCtrl', function ($scope, projectService, $state, StopwatchFactory, $ionicLoading, $ionicSideMenuDelegate, $timeout, $ionicPopup) {
         console.log('in projects controller');
 
@@ -17,6 +27,7 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
         };
 
         $scope.show($ionicLoading);
+
         projectService.getProjects().then(function (Projects) {
             console.log(Projects);
             $scope.Projects = Projects;
@@ -65,10 +76,25 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
 
     })
 
-    .controller('opportunitiesCtrl', function ($scope, opportunityService, StopwatchFactory) {
+    .controller('opportunitiesCtrl', function ($scope, opportunityService, StopwatchFactory, $ionicLoading) {
+        $scope.show = function () {
+            $ionicLoading.show({
+                template: '<p>Loading...</p><ion-spinner></ion-spinner>'
+            });
+        };
+
+        $scope.hide = function () {
+            $ionicLoading.hide();
+        };
+
+        $scope.show($ionicLoading);
+
         opportunityService.getOpportunities().then(function (Opportunities) {
             $scope.Opportunities = Opportunities;
             console.log($scope.Opportunities);
+        }).finally(function ($ionicLoading) {
+            // On both cases hide the loading
+            $scope.hide($ionicLoading);
         });
 
         $scope.opportunityClick = function loadOpportunity(clickEvent) {
@@ -111,9 +137,19 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
     })
 
     .controller('nominalsCtrl', function ($scope, nominalService, StopwatchFactory, $ionicLoading) {
-        nominalService.getNominals().then(function (Nominals) {
 
-            $scope.hide($ionicLoading);
+        $scope.show = function () {
+            $ionicLoading.show({
+                template: '<p>Loading...</p><ion-spinner></ion-spinner>'
+            });
+        };
+
+        $scope.hide = function () {
+            $ionicLoading.hide();
+        };
+
+        $scope.show($ionicLoading);
+        nominalService.getNominals().then(function (Nominals) {
             $scope.Nominals = Nominals;
         }).finally(function ($ionicLoading) {
             // On both cases hide the loading

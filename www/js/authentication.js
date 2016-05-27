@@ -24,7 +24,7 @@ angular.module('Authentication',[])
 
             /* Use this for real authentication
              ----------------------------------------------*/
-            $http.post('http://192.168.1.93:5562/crmapi/authenticate', { username: username, password: password })
+            $http.post('http://core-host-01:5562/crmapi/authenticate', { username: username, password: password })
               .success(function (response) {
                   if (!response.success) {
                       response.message = 'Username or password is incorrect';
@@ -55,6 +55,9 @@ angular.module('Authentication',[])
             $http.defaults.headers.common['Authorization'] = 'Basic' + authdata; // jshint ignore:line
             //$cookieStore.put('globals', $rootScope.globals);
             window.localStorage.setItem("globals", $rootScope.globals);
+            window.localStorage.setItem("username", username);
+            window.localStorage.setItem("password", password);
+
         };
 
         service.ClearCredentials = function () {
