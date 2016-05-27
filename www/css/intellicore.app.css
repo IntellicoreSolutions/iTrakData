@@ -33,6 +33,10 @@
     top: 60px;
 }
 
+.platform-ios .has-subheader  {
+    top: 83px;
+}
+
 @font-face {
     font-family: 'Poiret One';
     src: url('../fonts/PoiretOne-Regular.ttf');

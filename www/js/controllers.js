@@ -110,9 +110,14 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
         };
     })
 
-    .controller('nominalsCtrl', function ($scope, nominalService, StopwatchFactory) {
+    .controller('nominalsCtrl', function ($scope, nominalService, StopwatchFactory, $ionicLoading) {
         nominalService.getNominals().then(function (Nominals) {
+
+            $scope.hide($ionicLoading);
             $scope.Nominals = Nominals;
+        }).finally(function ($ionicLoading) {
+            // On both cases hide the loading
+            $scope.hide($ionicLoading);
         });
 
         $scope.nominalClick = function loadNominal(clickEvent) {
@@ -175,15 +180,15 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
             });
 
             //Timeout error
-            $timeout(function() {
-                $scope.hide($ionicLoading);
-                $scope.dataLoading = false;
-
-                var alertPopup = $ionicPopup.alert({
-                    title: 'Timeout Error',
-                    template: 'This was taking too long! Try again later.'
-                });
-            }, 22000);
+            // $timeout(function() {
+            //     $scope.hide($ionicLoading);
+            //     $scope.dataLoading = false;
+            //
+            //     var alertPopup = $ionicPopup.alert({
+            //         title: 'Timeout Error',
+            //         template: 'This was taking too long! Try again later.'
+            //     });
+            // }, 22000);
         }
 
         $scope.logout = function () {
