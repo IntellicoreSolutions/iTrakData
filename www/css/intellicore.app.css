@@ -34,7 +34,7 @@
 }
 
 .platform-ios .has-subheader  {
-    top: 83px;
+    top: 83px !important;
 }
 
 @font-face {
