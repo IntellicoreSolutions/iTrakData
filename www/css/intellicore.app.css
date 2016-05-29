@@ -228,4 +228,26 @@ h1 {
     margin-bottom: 10px;
 }
 
+.ic_info_tab {
+    background: url('../img/svg-icons/info.svg');
+    height: 30px;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+}
 
+.ic_time_tab {
+        background: url('../img/svg-icons/clock.svg');
+    height: 30px;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+}
+
+.ic_history_tab {
+        background: url('../img/svg-icons/clock-1.svg');
+    height: 30px;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+}

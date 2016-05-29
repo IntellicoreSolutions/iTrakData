@@ -252,9 +252,21 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
 
     })
 
-    .controller('projectTimeCaptureDetailsCtrl', function ($scope, $rootScope, $filter, $stateParams, projectService, StopwatchFactory, $ionicPopup, timesheetService) {
+    .controller('projectTimeCaptureDetailsCtrl', function ($scope, $rootScope, $filter, $stateParams, projectService, StopwatchFactory, $ionicPopup, timesheetService, $ionicLoading) {
         $scope.Project = projectService.getProject($stateParams.Id, false);
         $scope.Timesheet = {};
+
+        $scope.show = function () {
+            $ionicLoading.show({
+                template: '<p>Loading...</p><ion-spinner></ion-spinner>'
+            });
+        };
+
+        $scope.hide = function () {
+            $ionicLoading.hide();
+        };
+
+        
 
         //listen for the stopwatch to be started.
         $scope.$on('ic-stopwatch-started', function (event, args) {
@@ -330,8 +342,18 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
 
                     timesheetService.createTimesheet(timesheet);
 
+                    $scope.show($ionicLoading);
+
                     //update the current project record
-                    $scope.Project = projectService.getProject($stateParams.Id, true);
+                     return projectService.getProject($stateParams.Id, true).then(function (Project) {
+                        if (Project != null) {
+                            $scope.Project = Project;
+                        }
+                    }
+                    ).finally(function ($ionicLoading) {
+                        // On both cases hide the loading
+                        $scope.hide($ionicLoading);
+                    });
 
                     //options.resetTimer();
                     //options.showreset = false;

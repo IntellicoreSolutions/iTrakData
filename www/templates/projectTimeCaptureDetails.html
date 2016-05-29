@@ -9,9 +9,9 @@
         <tab-slide-box tab="0">
 			    	<div class="tsb-icons">
 			    		<div class="tsb-ic-wrp">
-							<a href="javascript:;" class="ion-home"></a>
-							<a href="javascript:;" class="ion-email"></a>
-							<a href="javascript:;" class="ion-person"></a>
+							<a href="javascript:;" class="ic_info_tab"></a>
+							<a href="javascript:;" class="ic_time_tab"></a>
+							<a href="javascript:;" class="ic_history_tab"></a>
 						</div>
 			    	</div>
 			        <ion-slide-box show-pager="true" on-slide-changed="slideHasChanged($index)">
@@ -97,6 +97,7 @@
 			            </ion-slide>
 			            <ion-slide>
 			                <h2>Previous Timesheet Lines</h2>        
+                            <ion-scroll style="height:375px" delegate-handle="slide1Scroll">
                             <section id="cd-timeline" class="cd-container">
                                 <div id="Div1" class="" ng-repeat="Timeline in Project.timesheetlines | orderBy:['-date']" class="cd-timeline-icon dark">
                                     <div class="cd-timeline-block">
@@ -115,6 +116,7 @@
                                     </div>
                                 </div>
                             </section>
+                                </ion-scroll>
 			            </ion-slide>
                     </ion-slide-box>
                 </tab-slide-box>
