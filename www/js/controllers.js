@@ -1,11 +1,53 @@
 angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
 //angular.module('Authentication')
 
-    .controller('AppController', function($scope) {
+    .controller('AppController', function($scope, $rootScope, $location, $state, AuthenticationService, $ionicLoading, $ionicSideMenuDelegate, $window, $timeout, $ionicPopup) {
         //alert(window.localStorage.getItem("globals"));
 
         //alert(window.localStorage.getItem("username"));
         //alert(window.localStorage.getItem("password"));
+
+        alert('hey');
+
+        $scope.user = {};
+        $scope.user.username = window.localStorage.getItem("username");
+        $scope.user.password = window.localStorage.getItem("password");
+
+
+        // reset login status
+        AuthenticationService.ClearCredentials();
+
+        $scope.show = function () {
+            $ionicLoading.show({
+                template: '<p>Loading...</p><ion-spinner></ion-spinner>'
+            });
+        };
+
+        $scope.hide = function () {
+            $ionicLoading.hide();
+        };
+
+        //$scope.show($ionicLoading);
+
+        $scope.login = function () {
+
+            $scope.show($ionicLoading);
+            $scope.dataLoading = true;
+            AuthenticationService.Login($scope.user.username, $scope.user.password, function (response) {
+                if (response.success) {
+                    console.log('authentication successful');
+                    AuthenticationService.SetCredentials($scope.user.username, $scope.user.password, response.ID);
+                    $scope.hide($ionicLoading);
+                    $state.go('landingPage');
+
+                } else {
+                    $scope.hide($ionicLoading);
+                    $scope.error = response.message;
+                    $scope.dataLoading = false;
+                }
+            });
+
+        }
 
 
 
