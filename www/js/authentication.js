@@ -24,7 +24,7 @@ angular.module('Authentication',[])
 
             /* Use this for real authentication
              ----------------------------------------------*/
-            $http.post('http://core-host-01:5562/crmapi/authenticate', { username: username, password: password })
+            $http.post('http://192.168.1.152:5562/crmapi/authenticate', { username: username, password: password })
               .success(function (response) {
                   if (!response.success) {
                       response.message = 'Username or password is incorrect';
