@@ -308,19 +308,89 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
             $ionicLoading.hide();
         };
 
-        
+        //listen for manual time entry
+        $scope.createTimeLine = function createTimeLine() {
+            $scope.Timesheet.project = $scope.Project.id;
+            $scope.Timesheet.phase = $scope.SelectedPhase;
+            $scope.Timesheet.description = $scope.Description;
+            $scope.Timesheet.worktype = "Project";
+            $scope.Timesheet.employee = $rootScope.globals.currentUser.id;
+
+            $scope.Timesheet.fromDate = $scope.fromDate;
+            $scope.Timesheet.fromTime = $scope.fromTime;
+            $scope.Timesheet.toDate = $scope.toDate;
+            $scope.Timesheet.toTime = $scope.toTime;
+
+            console.log('1: ' + $scope.fromDate);
+            console.log('2: ' + $scope.fromTime);
+            console.log('3: ' + $scope.toDate);
+            console.log('4: ' + $scope.toTime);
+
+            showManualConfirm();
+        }
+
+
+        showManualConfirm = function (args) {
+            var confirmManualPopup = $ionicPopup.confirm({
+                title: 'Create a Timesheet Line?',
+                template: 'Are you sure you want to create a timesheet line?',
+                cancelText: 'Cancel',
+                okText: 'Yes!',
+            });
+
+            confirmManualPopup.then(function (res) {
+                if (res) {
+                    console.log('Lets Create the Timesheet');
+                    console.log('project id: ' + $scope.Project.Id);
+                    console.log('project phase: ' + $scope.SelectedPhase);
+                    console.log('employee id:' + $scope.Project.employee);
+
+                    var timesheet = {
+                        //fill the timesheet out and send it to the create method.
+                        project: $scope.Timesheet.project,
+                        projectphase: $scope.Timesheet.phase,
+                        employee: $scope.Timesheet.employee,
+                        date: $scope.Timesheet.date,
+                        starttime: $scope.Timesheet.starttime,
+                        endtime: $scope.Timesheet.endtime,
+                        duration: $scope.Timesheet.duration,
+                        description: $scope.Timesheet.description,
+                        worktype: $scope.Timesheet.worktype
+                    }
+
+                    timesheetService.createTimesheet(timesheet);
+
+                    $scope.show($ionicLoading);
+
+                    //update the current project record
+                    return projectService.getProject($stateParams.Id, true).then(function (Project) {
+                            if (Project != null) {
+                                $scope.Project = Project;
+                            }
+                        }
+                    ).finally(function ($ionicLoading) {
+                        // On both cases hide the loading
+                        $scope.hide($ionicLoading);
+                    });
+
+                    //options.resetTimer();
+                    //options.showreset = false;
+                } else {
+                    console.log('Dont Create the Timesheet');
+                }
+            });
+        };
+
 
         //listen for the stopwatch to be started.
         $scope.$on('ic-stopwatch-started', function (event, args) {
-
             console.log(args);
-
             //Log Date
             $scope.Timesheet.date = $filter('date')(new Date(), 'dd/MM/yyyy');
             //Log StartTime
             $scope.Timesheet.starttime = $filter('date')(new Date(), 'dd/MM/yyyy hh:mm:ss');
-
         });
+
         //listen for stopwatch stopped.
         $scope.$on('ic-stopwatch-stopped', function (event, args) {
             console.log(args);
@@ -337,9 +407,9 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
             var ms = elapsed % 1000;
 
             //startTime: startTime, currentTime: new Date().getTime(), interval: options.interval, offset: offset, elapsed: offset + (currentTime - startTime) };
-            $scope.Timesheet.date = (new Date(args.startTime)).toUTCString();
-            $scope.Timesheet.starttime = (new Date(args.startTime)).toUTCString();
-            $scope.Timesheet.endtime = (new Date(args.currentTime)).toUTCString();
+            $scope.Timesheet.date = new Date(args.startTime);
+            $scope.Timesheet.starttime = new Date(args.startTime);
+            $scope.Timesheet.endtime = new Date(args.currentTime);
             console.log('logging...' + args.currentTime + ' - ' + (new Date(args.currentTime)) + ' - ' + (new Date(args.currentTime)).toUTCString());
             $scope.Timesheet.duration = hours + ':' + mins + ':' + secs;
             $scope.Timesheet.project = $scope.Project.id;
@@ -353,6 +423,7 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
             showConfirm();
 
         });
+
 
         showConfirm = function (args) {
             var confirmPopup = $ionicPopup.confirm({
@@ -464,6 +535,7 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
 
         $scope.createTimeLine = function createTimeLine() {
             console.log('create timesheet line from the static form on page');
+            alert('ouch');
         }
 
         $scope.timelineClick = function timelineNominal(clickEvent) {
