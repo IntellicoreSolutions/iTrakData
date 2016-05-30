@@ -17,8 +17,7 @@
 			        <ion-slide-box show-pager="true" on-slide-changed="slideHasChanged($index)">
 			            <ion-slide style="height:100%">
 			                <h2>Project Details</h2>
-                                <ion-scroll style="height:375px" delegate-handle="slide1Scroll">
-                                    <div style="height:375px">
+                                <ion-scroll style="height: calc(100% - 80px);">
                                         <table style="text-align:left" class="project_table">
                                             <tr>
                                                 <td colspan="2">
@@ -40,14 +39,18 @@
                                             </tr>
                                         </table>
                                         <br />
-                                        <h5>Project Phase Overview</h5>
+                                        <h2>Project Phase Overview</h2>
                                         <ion-list id="projectTimeCaptureLogTime-list8" class=" " show-delete="false" can-swipe="true">
                                             <ion-item id="projectTimeCaptureLogTime-list-item21" class="  " collection-repeat="Phase in Project.project_phases | orderBy:'intellic_projectphasecategory'">
-                                                <h3>{{Phase.intellic_projectphasecategory}}<br />
-                                                <b>Quoted:</b> {{Phase.intellic_quotedquantity}} - <b>Time Applied:</b> {{Phase.intellic_timeapplied}} - <b>Left:</b> {{Phase.intellic_quotedquantity - Phase.timeapplied}}<br /><b>Billed:</b> {{Phase.intellic_billedtodate}} - <b>UnBilled:</b> {{Phase.intellic_timeapplied - Phase.intellic_billedtodate}}</h3>
+                                                <div><strong>{{Phase.intellic_projectphasecategory}}</strong></div>
+                                                <div><b>Quoted:</b> {{Phase.intellic_quotedquantity}}</div>
+                                                <div><b>Time Applied:</b> {{Phase.intellic_timeapplied}}</div>
+                                                <div><b>Left:</b> {{Phase.intellic_quotedquantity - Phase.timeapplied}}</div>
+                                                <div><b>Billed:</b> {{Phase.intellic_billedtodate}}</div>
+                                                <div><b>UnBilled:</b> {{Phase.intellic_timeapplied - Phase.intellic_billedtodate}}</div>
                                             </ion-item>
                                         </ion-list>
-                                    </div>
+
                                 </ion-scroll>
                                     
                         </ion-slide>

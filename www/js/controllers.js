@@ -7,7 +7,7 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
         //alert(window.localStorage.getItem("username"));
         //alert(window.localStorage.getItem("password"));
 
-        alert('hey');
+        //alert('hey');
 
         $scope.user = {};
         $scope.user.username = window.localStorage.getItem("username");

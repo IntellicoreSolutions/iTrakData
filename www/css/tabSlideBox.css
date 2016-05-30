@@ -1,6 +1,12 @@
 .tabbed-slidebox .slider {
-    height: 100%;
+    height: calc(100vh - 210px);
 }
+
+.tabbed-slidebox .slider-slide {
+    height: 100vh;
+    width: auto;
+}
+
 .tabbed-slidebox.btm .slider {
     margin-bottom: -50px;
 }
@@ -95,9 +101,9 @@
 .tabbed-slidebox .tsb-icons:after{
 display:none;
 }
-		
-::-webkit-scrollbar { 
-    display: none; 
+
+::-webkit-scrollbar {
+    display: none;
 }
-		
+
 
