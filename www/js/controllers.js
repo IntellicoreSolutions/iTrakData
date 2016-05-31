@@ -249,7 +249,6 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
                     AuthenticationService.SetCredentials($scope.user.username, $scope.user.password, response.ID);
                     $scope.hide($ionicLoading);
                     $state.go('landingPage');
-
                 } else {
                     $scope.hide($ionicLoading);
                     $scope.error = response.message;
@@ -280,7 +279,6 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
                     $scope.error = response.message;
                     $scope.dataLoading = false;
                 }
-
             });
         };
 
@@ -298,6 +296,11 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
         $scope.Project = projectService.getProject($stateParams.Id, false);
         $scope.Timesheet = {};
 
+
+        $scope.UserTimerToggled = function() {
+            //alert('toggled');
+        }
+
         $scope.show = function () {
             $ionicLoading.show({
                 template: '<p>Loading...</p><ion-spinner></ion-spinner>'
@@ -311,8 +314,8 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
         //listen for manual time entry
         $scope.createTimeLine = function createTimeLine() {
             $scope.Timesheet.project = $scope.Project.id;
-            $scope.Timesheet.phase = $scope.SelectedPhase;
-            $scope.Timesheet.description = $scope.Description;
+            $scope.Timesheet.phase = $scope.selectedPhaseManual;
+            $scope.Timesheet.description = $scope.descriptionManual;
             $scope.Timesheet.worktype = "Project";
             $scope.Timesheet.employee = $rootScope.globals.currentUser.id;
 
@@ -320,6 +323,25 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
             $scope.Timesheet.fromTime = $scope.fromTime;
             $scope.Timesheet.toDate = $scope.toDate;
             $scope.Timesheet.toTime = $scope.toTime;
+
+            $scope.Timesheet.date = $scope.toDate;
+
+            $scope.Timesheet.starttime = $scope.fromTime;
+            $scope.Timesheet.endtime = $scope.toTime;
+
+            $scope.milliseconds = $scope.toTime - $scope.fromTime;
+
+            // Convert duration milliseconds into H:MM
+            var durationMilliseconds = new Date($scope.milliseconds);
+            var minutes = durationMilliseconds.getMinutes();
+
+            if (minutes < 10) {
+                minutes = "0" + minutes;
+            }
+
+            var duration = durationMilliseconds.getHours() + ":" + minutes;
+
+            $scope.Timesheet.duration = duration;
 
             console.log('1: ' + $scope.fromDate);
             console.log('2: ' + $scope.fromTime);
