@@ -391,7 +391,6 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
                             }
                         }
                     ).finally(function ($ionicLoading) {
-                        // On both cases hide the loading
                         $scope.hide($ionicLoading);
                     });
 
@@ -486,7 +485,6 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
                         }
                     }
                     ).finally(function ($ionicLoading) {
-                        // On both cases hide the loading
                         $scope.hide($ionicLoading);
                     });
 
@@ -510,18 +508,50 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
 
     })
 
-    .controller('opportunityTimeCaptureDetailsCtrl', function ($scope, $stateParams, opportunityService, StopwatchFactory) {
+    .controller('opportunityTimeCaptureDetailsCtrl', function ($scope, $stateParams, opportunityService, $ionicLoading, StopwatchFactory) {
         console.log($stateParams.Id);
+
+        $scope.show = function () {
+            $ionicLoading.show({
+                template: '<p>Loading...</p><ion-spinner></ion-spinner>'
+            });
+        };
+
+        $scope.hide = function () {
+            $ionicLoading.hide();
+        };
+
+        $scope.show($ionicLoading);
+
         opportunityService.getOpportunity($stateParams.Id).then(function (Opportunity) {
             $scope.Opportunity = Opportunity;
             console.log($scope.Opportunity);
+        }
+        ).finally(function ($ionicLoading) {
+            $scope.hide($ionicLoading);
         });
     })
 
-    .controller('nominalTimeCaptureDetailsCtrl', function ($scope, $stateParams, nominalService, StopwatchFactory) {
+    .controller('nominalTimeCaptureDetailsCtrl', function ($scope, $stateParams, nominalService, $ionicLoading, StopwatchFactory) {
+
+        $scope.show = function () {
+            $ionicLoading.show({
+                template: '<p>Loading...</p><ion-spinner></ion-spinner>'
+            });
+        };
+
+        $scope.hide = function () {
+            $ionicLoading.hide();
+        };
+
+        $scope.show($ionicLoading);
+
         nominalService.getNominal($stateParams.Id).then(function (Nominal) {
             $scope.Nominal = Nominal;
             console.log($scope.Nominal);
+        }
+        ).finally(function ($ionicLoading) {
+            $scope.hide($ionicLoading);
         });
     })
 
