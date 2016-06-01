@@ -98,6 +98,7 @@
             options.showreset = true;
             
             //broadcast to any interested controllers that the timer has been stopped.
+            var tableForm = { phase: selectedPhaseStopwatch, description: descriptionStopwatch, startTime: startTime, currentTime: currentTime, interval: options.interval, offset: offset, elapsed: currentTime - startTime };
             $rootScope.$broadcast("ic-stopwatch-stopped", tableForm);
         };
 
