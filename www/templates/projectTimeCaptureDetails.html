@@ -58,89 +58,95 @@
                 </ion-slide>
                 <ion-slide style="height:100%">
                     <h2>Time Tracker</h2>
-                    <ion-scroll style="height:375px" delegate-handle="slide1Scroll">
+                    <ion-scroll style="height:375px" delegate-handle="slide1Scroll" >
                         <div style="display: block; width:100%;">
-                            <form id="timeForm" class="">
-                                <!-- Inputs for stopwatch -->
+
+
+                            <ion-toggle toggle-class="toggle-positive" id="nominalTimeCaptureLogTime-toggle3"
+                                        ng-model="UseTimer" ng-change="UserTimerToggled()">Timer Input
+                            </ion-toggle>
+
+
+                            <form id="manualTimeForm" ng-hide="UseTimer">
+                                <!-- Inputs for Manual Time -->
                                 <label class="item item-select " id="projectTimeCaptureLogTime-select1"
-                                       name="Project Phase" ng-show="UseTimer">
-                                    <span class="input-label">Select</span>
-                                    <select ng-model="SelectedPhase">
+                                       name="Project Phase">
+                                    <span class="input-label">Select1111</span>
+                                    <select ng-model="selectedPhase">
                                         <option ng-repeat="option in Project.project_phases" value="{{option.id}}">
                                             {{option.intellic_projectphasecategory}}
                                         </option>
                                     </select>
                                 </label>
-                                <label class="item item-input " id="nominalTimeCaptureLogTime-textarea2" ng-show="UseTimer">
+                                <label class="item item-input " id="nominalTimeCaptureLogTime-textarea2">
                                     <span class="input-label">Description</span>
-                                    <textarea placeholder="" ng-model="Description" required> </textarea>
+                                    <textarea placeholder="" ng-model="description" required> </textarea>
                                 </label>
 
-                                <!-- Inputs for manual time -->
-                                <label class="item item-select " id="projectTimeCaptureLogTime-select11"
-                                       name="Project Phase" ng-hide="UseTimer">
-                                    <span class="input-label">Select</span>
-                                    <select ng-model="selectedPhaseManual">
-                                        <option ng-repeat="option in Project.project_phases" value="{{option.id}}">
-                                            {{option.intellic_projectphasecategory}}
-                                        </option>
-                                    </select>
-                                </label>
-                                <label class="item item-input " id="nominalTimeCaptureLogTime-textarea22" ng-hide="UseTimer">
-                                    <span class="input-label">Description</span>
-                                    <textarea placeholder="" ng-model="descriptionManual" required> </textarea>
-                                </label>
 
-                                <ion-toggle toggle-class="toggle-positive" id="nominalTimeCaptureLogTime-toggle3"
-                                            class=" "
-                                            ng-model="UseTimer" ng-change="UserTimerToggled()">Timer Input
-                                </ion-toggle>
+                                <ion-list id="nominalTimeCaptureLogTime-list9" class=" ">
+                                    <label class="item item-input " id="nominalTimeCaptureLogTime-input4">
+                                        <span class="input-label">From</span>
+                                        <input type="date" ng-model="fromDate">
+                                        <input type="time" ng-model="fromTime">
+                                    </label>
+                                    <label class="item item-input " id="nominalTimeCaptureLogTime-input6">
+                                        <span class="input-label">To</span>
+                                        <input type="date" ng-model="toDate">
+                                        <input type="time" ng-model="toTime">
+                                    </label>
+                                    <button id="Button1" class=" button button-balanced  button-block "
+                                            ng-click="createTimeLine(selectedPhase, description, fromDate, fromTime, toDate, toTime)">Create Time Line
+                                    </button>
+                                </ion-list>
                             </form>
 
-                            <div ng-app="stopWatchApp" ng-controller="stopWatchDemoCtrl" ng-show="UseTimer">
-                                <div ng-repeat="options in stopwatch">
-                                    <div bb-stopwatch options="options">
-                                        <div class="container">
-                                            <div>
-                                                <h1 id="H2" style="color:#000000;text-align:center;"
-                                                    class="stopWatch numbers">{{options.elapsedTime |
-                                                    stopwatchTime}}</h1>
+
+                            <form id="timeForm"  ng-show="UseTimer">
+                                <!-- Inputs for stopwatch -->
+                                <label class="item item-select " id="projectTimeCaptureLogTime-select11"
+                                       name="Project Phase">
+                                    <span class="input-label">Select</span>
+                                    <select ng-model="selectedPhaseStopwatch" >
+                                        <option ng-repeat="option in Project.project_phases" value="{{option.id}}">
+                                            {{option.intellic_projectphasecategory}}
+                                        </option>
+                                    </select>
+                                </label>
+                                <label class="item item-input " id="nominalTimeCaptureLogTime-textarea22">
+                                    <span class="input-label">Description</span>
+                                    <textarea placeholder="" ng-model="descriptionStopwatch" required> </textarea>
+                                </label>
+
+                                <div ng-app="stopWatchApp" ng-controller="stopWatchDemoCtrl" ng-show="UseTimer">
+                                    <div ng-repeat="options in stopwatch">
+                                        <div bb-stopwatch options="options">
+                                            <div class="container">
+                                                <div>
+                                                    <h1 id="H2" style="color:#000000;text-align:center;"
+                                                        class="stopWatch numbers">{{options.elapsedTime |
+                                                        stopwatchTime}}</h1>
+                                                </div>
+                                                <button id="nominal-log-start" ng-hide="options.running"
+                                                        class=" button button-balanced  button-block "
+                                                        ng-click="startTimer()">
+                                                    Start
+                                                </button>
+                                                <button id="nominal-log-stop" ng-show="options.running"
+                                                        class=" button button-balanced  button-block "
+                                                    Stop
+                                                </button>
+                                                <button id="nominal-log-reset" ng-show="options.showreset"
+                                                        class=" button button-balanced  button-block "
+                                                        ng-click="resetTimer()">
+                                                    Reset
+                                                </button>
                                             </div>
-                                            <button id="nominal-log-start" ng-hide="options.running"
-                                                    class=" button button-balanced  button-block "
-                                                    ng-click="startTimer()">
-                                                Start
-                                            </button>
-                                            <button id="nominal-log-stop" ng-show="options.running"
-                                                    class=" button button-balanced  button-block "
-                                                    ng-click="stopTimer()">
-                                                Stop
-                                            </button>
-                                            <button id="nominal-log-reset" ng-show="options.showreset"
-                                                    class=" button button-balanced  button-block "
-                                                    ng-click="resetTimer()">
-                                                Reset
-                                            </button>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
 
-                            <ion-list id="nominalTimeCaptureLogTime-list9" class=" " ng-hide="UseTimer" ng-controller="projectTimeCaptureDetailsCtrl">
-                                <label class="item item-input " id="nominalTimeCaptureLogTime-input4">
-                                    <span class="input-label">From</span>
-                                    <input type="date" ng-model="fromDate">
-                                    <input type="time" ng-model="fromTime">
-                                </label>
-                                <label class="item item-input " id="nominalTimeCaptureLogTime-input6">
-                                    <span class="input-label">To</span>
-                                    <input type="date" ng-model="toDate">
-                                    <input type="time" ng-model="toTime">
-                                </label>
-                                <button id="Button1" class=" button button-balanced  button-block "
-                                        ng-click="createTimeLine()">Create Time Line
-                                </button>
-                            </ion-list>
                         </div>
                     </ion-scroll>
                 </ion-slide>

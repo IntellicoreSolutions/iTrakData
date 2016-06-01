@@ -73,13 +73,20 @@
                 options.running = true;
                 options.showreset = false;
 
+                //Add start time to local storage. If this has a value then we know the timer is running.
+                window.localStorage.setItem( 'startTime', startTime );
+
                 //broadcast to any interested controllers that the timer has been stopped.
                 var tableForm = { startTime: startTime, currentTime: new Date().getTime(), interval: options.interval, offset: offset, elapsed: currentTime - startTime };
                 $rootScope.$broadcast("ic-stopwatch-started", tableForm);
             }
         };
 
-        self.stopTimer = function () {
+        self.stopTimer = function (selectedPhaseStopwatch, descriptionStopwatch) {
+
+            // alert('phase ' + selectedPhaseStopwatch);
+            // alert('description ' + descriptionStopwatch);
+
             if (options.running === false) {
                 return;
             }
@@ -91,7 +98,6 @@
             options.showreset = true;
             
             //broadcast to any interested controllers that the timer has been stopped.
-            var tableForm = { startTime: startTime, currentTime: currentTime, interval: options.interval, offset: offset, elapsed: currentTime - startTime };
             $rootScope.$broadcast("ic-stopwatch-stopped", tableForm);
         };
 
