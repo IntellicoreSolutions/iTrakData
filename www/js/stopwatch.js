@@ -70,8 +70,8 @@
                  options.elapsedTime.setTime(timeElapsed);
 
                 //console.log(currentTime);
-                console.log(startTime);
-                console.log(offset);
+                // console.log(startTime);
+                // console.log(offset);
                 //console.log(timeElapsed);
             };
 
@@ -90,6 +90,7 @@
                         options.showreset = false;
 
                         //Add start time to local storage. If this has a value then we know the timer is running.
+                        window.localStorage.setItem('timeStorage', 'true');
                         window.localStorage.setItem('startTimeStorage', startTimeStorage);
 
                         //broadcast to any interested controllers that the timer has been stopped.
@@ -116,6 +117,22 @@
 
                     timerPopup.then(function (res) {
                         if (res) {
+
+                            // //Remove time from local storage
+                            // window.localStorage.setItem('timeStorage', false);
+                            // localStorage.removeItem('startTimeStorage');
+                            // localStorage.removeItem('endTimeStorage');
+
+                            var tableForm = {
+                                startTime: startTime,
+                                currentTime: new Date().getTime(),
+                                interval: options.interval,
+                                offset: offset,
+                                elapsed: currentTime - startTime
+                            };
+
+                            $rootScope.$broadcast("ic-stopwatch-stopped", tableForm);
+
 
                             // window.localStorage.setItem('endTimeStorage', new Date().getTime());
                             //
@@ -165,7 +182,7 @@
                 if (options.running === false) {
                     return;
                 }
-                
+
                 self.updateTime();
                 offset = offset + currentTime - startTime;
                 pushToLog(currentTime - startTime);

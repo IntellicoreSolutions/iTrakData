@@ -411,6 +411,8 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
             $scope.Timesheet.date = $filter('date')(new Date(), 'dd/MM/yyyy');
             //Log StartTime
             $scope.Timesheet.starttime = $filter('date')(new Date(), 'dd/MM/yyyy hh:mm:ss');
+
+            //window.localStorage.setItem('timeStorage', 'true');
         });
         
 
@@ -421,8 +423,9 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
             console.log('phase: ' + args.phase);
 
             //Remove time from local storage
-            localStorage.removeItem('startTimeStorage');
-            localStorage.removeItem('endTimeStorage');
+
+            // localStorage.removeItem('startTimeStorage');
+            // localStorage.removeItem('endTimeStorage');
 
             //convert the timestamp to a date time object
             var elapsed = args.elapsed;
@@ -447,19 +450,25 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
             console.log('logging timesheetline: ' + $scope.Timesheet);
             //var employe = "";
 
+            // window.localStorage.setItem('timeStorage', 'false');
 
-            if (localStorage.getItem("startTimeStorage") === null) {
+            if (localStorage.getItem('timeStorage') === 'true') {
+               // window.localStorage.setItem('timeStorage', 'false');
+                createStorageTimesheet();
+                // window.localStorage.setItem('timeStorage', 'false');
+            } else {
                 // A confirm dialog
                 showConfirm();
-
-            } else {
-                createStorageTimesheet();
+               // window.localStorage.setItem('timeStorage', 'false');
             }
 
         });
 
 
         showConfirm = function (args) {
+
+            window.localStorage.setItem('timeStorage', 'false');
+
             var confirmPopup = $ionicPopup.confirm({
                 title: 'Create a Timesheet Line?',
                 template: 'Are you still logging time against this task or would you like to create a timesheet line?',
@@ -512,7 +521,39 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
 
         createStorageTimesheet = function () {
 
-            alert('Storage Timesheet');
+            console.log('Storage Timesheet');
+
+            window.localStorage.setItem('timeStorage', 'false');
+
+            // var timesheet = {
+            //     //fill the timesheet out and send it to the create method.
+            //     project: $scope.Timesheet.project,
+            //     projectphase: $scope.Timesheet.phase,
+            //     employee: $scope.Timesheet.employee,
+            //     date: $scope.Timesheet.date,
+            //     starttime: $scope.Timesheet.starttime,
+            //     endtime: $scope.Timesheet.endtime,
+            //     duration: $scope.Timesheet.duration,
+            //     description: $scope.Timesheet.description,
+            //     worktype: $scope.Timesheet.worktype
+            // }
+            //
+            // timesheetService.createTimesheet(timesheet);
+            //
+            //
+            // $scope.show($ionicLoading);
+            //
+            //
+            //
+            // //update the current project record
+            // return projectService.getProject($stateParams.Id, true).then(function (Project) {
+            //         if (Project != null) {
+            //             $scope.Project = Project;
+            //         }
+            //     }
+            // ).finally(function ($ionicLoading) {
+            //     $scope.hide($ionicLoading);
+            // });
         }
 
 
