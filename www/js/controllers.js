@@ -269,7 +269,6 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
         }
 
         $scope.logout = function () {
-            console.log('laksjdlaskjdlaksjdlaskjd');
             $scope.dataLoading = true;
             AuthenticationService.ClearCredentials(function (response) {
                 if (response.success) {
@@ -421,6 +420,10 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
             console.log('description: ' + args.description);
             console.log('phase: ' + args.phase);
 
+            //Remove time from local storage
+            localStorage.removeItem('startTimeStorage');
+            localStorage.removeItem('endTimeStorage');
+
             //convert the timestamp to a date time object
             var elapsed = args.elapsed;
             var hours = parseInt(elapsed / 3600000, 10);
@@ -443,8 +446,15 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
             $scope.Timesheet.employee = $rootScope.globals.currentUser.id;
             console.log('logging timesheetline: ' + $scope.Timesheet);
             //var employe = "";
-            // A confirm dialog
-            showConfirm();
+
+
+            if (localStorage.getItem("startTimeStorage") === null) {
+                // A confirm dialog
+                showConfirm();
+
+            } else {
+                createStorageTimesheet();
+            }
 
         });
 
@@ -498,6 +508,15 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
                 }
             });
         };
+
+
+        createStorageTimesheet = function () {
+
+            alert('Storage Timesheet');
+        }
+
+
+
     })
 
     .controller('supportTimeCaptureDetailsCtrl', function ($scope) {
