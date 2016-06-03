@@ -1,7 +1,7 @@
 <ion-view title="Project Time Capture - Details" id="page11" class=" ">
     <ion-content padding="true" class="has-header tab_background" scroll="false">
         <h3 id="projectTimeCaptureDetails-heading1" style="color:#000000;text-align:center;" class=" ">
-            {{Project.intellic_customer}}-{{Project.intellic_name}}</h3>
+            {{Project.intellic_customer}} - {{Project.intellic_name}}</h3>
         <h5 id="H1" style="color:#000000;text-align:center;" class=" ">{{Project.intellic_projectidentification}}</h5>
         <!--<div id="projectTimeCaptureDetails-button-bar1" class=" button-bar ">
             <button id="projectTimeCaptureDetails-button4" class=" button button-dark  button-block ">Details</button>
@@ -22,7 +22,7 @@
                         <table style="text-align:left" class="project_table">
                             <tr>
                                 <td colspan="2">
-                                    <h4>Customer:</h4> {{Project.intellic_customer}}
+                                    <h4>Customer:</h4><div>{{Project.intellic_customer}}</div>
                                 </td>
                             </tr>
                             <tr>
@@ -42,7 +42,7 @@
                         <br/>
                         <h2>Project Phase Overview</h2>
                         <ion-list id="projectTimeCaptureLogTime-list8" class=" " show-delete="false" can-swipe="true">
-                            <ion-item id="projectTimeCaptureLogTime-list-item21" class="  "
+                            <ion-item id="projectTimeCaptureLogTime-list-item21" class=""
                                       collection-repeat="Phase in Project.project_phases | orderBy:'intellic_projectphasecategory'">
                                 <div><strong>{{Phase.intellic_projectphasecategory}}</strong></div>
                                 <div><b>Quoted:</b> {{Phase.intellic_quotedquantity}}</div>
@@ -71,7 +71,7 @@
                                 <!-- Inputs for Manual Time -->
                                 <label class="item item-select " id="projectTimeCaptureLogTime-select1"
                                        name="Project Phase">
-                                    <span class="input-label">Select1111</span>
+                                    <span class="input-label">Select</span>
                                     <select ng-model="selectedPhase">
                                         <option ng-repeat="option in Project.project_phases" value="{{option.id}}">
                                             {{option.intellic_projectphasecategory}}
@@ -122,19 +122,19 @@
                                     <div ng-repeat="options in stopwatch">
                                         <div bb-stopwatch options="options">
                                             <div class="container">
-                                                <div>
+                                                <div class="stopwatch_area">
                                                     <h1 id="H2" style="color:#000000;text-align:center;"
                                                         class="stopWatch numbers">{{options.elapsedTime |
                                                         stopwatchTime}}</h1>
                                                 </div>
                                                 <button id="nominal-log-start" ng-hide="options.running"
                                                         class=" button button-balanced  button-block "
-                                                        ng-click="startTimer()">
+                                                        ng-click="startTimer(customer)">
                                                     Start
                                                 </button>
                                                 <button id="nominal-log-stop" ng-show="options.running"
                                                         class=" button button-balanced  button-block "
-                                                        ng-click="stopTimer(selectedPhaseStopwatch, descriptionStopwatch)">
+                                                        ng-click="stopTimer(selectedPhaseStopwatch, descriptionStopwatch, customer)">
                                                     Stop
                                                 </button>
                                                 <button id="nominal-log-reset" ng-show="options.showreset"
@@ -142,6 +142,8 @@
                                                         ng-click="resetTimer()">
                                                     Reset
                                                 </button>
+                                                <!-- pass the name of the current customer/client to the stopwatch controller -->
+                                                <input id="customer" type="hidden" ng-model="customer" ng-init="customer=[Project.intellic_customer]">
                                             </div>
                                         </div>
                                     </div>

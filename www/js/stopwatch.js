@@ -46,7 +46,7 @@
             self = this;
 
         if (!options.interval) {
-            options.interval = 1000;//was 100
+            options.interval = 1000; //was 100
         }
 
         options.elapsedTime = new Date(0);
@@ -66,20 +66,77 @@
             options.elapsedTime.setTime(timeElapsed);
         };
 
-        self.startTimer = function () {
-            if (options.running === false) {
-                startTime = new Date().getTime();
-                interval = $interval(self.updateTime, options.interval);
-                options.running = true;
-                options.showreset = false;
+        self.startTimer = function (customer) {
 
-                //Add start time to local storage. If this has a value then we know the timer is running.
-                window.localStorage.setItem( 'startTime', startTime );
+            // Check to see if a timer is already running in local storage
+            if (localStorage.getItem("startTime") === null) {
+                console.log('no running timer');
 
-                //broadcast to any interested controllers that the timer has been stopped.
-                var tableForm = { startTime: startTime, currentTime: new Date().getTime(), interval: options.interval, offset: offset, elapsed: currentTime - startTime };
-                $rootScope.$broadcast("ic-stopwatch-started", tableForm);
+                if (options.running === false) {
+                    startTime = new Date().getTime();
+                    interval = $interval(self.updateTime, options.interval);
+                    options.running = true;
+                    options.showreset = false;
+
+                    //Add start time to local storage. If this has a value then we know the timer is running.
+                    window.localStorage.setItem( 'startTime', startTime );
+
+                    //broadcast to any interested controllers that the timer has been stopped.
+                    var tableForm = { startTime: startTime, currentTime: new Date().getTime(), interval: options.interval, offset: offset, elapsed: currentTime - startTime };
+                    $rootScope.$broadcast("ic-stopwatch-started", tableForm);
+                }
+
+
+            } else {
+
+
+                console.log('timer is running elsewhere ' + customer);
+
+                var timerPopup = $ionicPopup.confirm({
+                    title: 'Warning!',
+                    template: 'You already have a timer running in the project ' + customer + ' .Would you like to create a timesheet for that project and start this timer?',
+                    cancelText: 'Cancel',
+                    okText: 'Yes!',
+                });
+
+                timerPopup.then(function (res) {
+                    if (res) {
+
+                        window.localStorage.setItem( 'endTime', new Date().getTime());
+
+                        // convert local storage milliseconds time to something more readable
+                        var projectTimeMilliSeconds = window.localStorage.getItem('endTime') - window.localStorage.getItem('startTime');
+                        var mydate = new Date(projectTimeMilliSeconds);
+                        var projectTime = mydate.getUTCHours()+" hours, "+mydate.getUTCMinutes()+" minutes and "+mydate.getUTCSeconds()+" second(s)";
+
+                        alert(projectTime);
+
+                        self.stopTimer();
+
+                        if (options.running === false) {
+                            startTime = new Date().getTime();
+                            interval = $interval(self.updateTime, options.interval);
+                            options.running = true;
+                            options.showreset = false;
+
+                            //Add start time to local storage. If this has a value then we know the timer is running.
+                            window.localStorage.setItem( 'startTime', startTime );
+
+                            //broadcast to any interested controllers that the timer has been stopped.
+                            var tableForm = { startTime: startTime, currentTime: new Date().getTime(), interval: options.interval, offset: offset, elapsed: currentTime - startTime };
+                            $rootScope.$broadcast("ic-stopwatch-started", tableForm);
+                        }
+
+                    } else {
+
+                    }
+                });
+
             }
+
+
+
+
         };
 
         self.stopTimer = function (selectedPhaseStopwatch, descriptionStopwatch) {
@@ -87,15 +144,24 @@
             // alert('phase ' + selectedPhaseStopwatch);
             // alert('description ' + descriptionStopwatch);
 
+
+
             if (options.running === false) {
                 return;
             }
+
+            // alert('working');
+
             self.updateTime();
             offset = offset + currentTime - startTime;
             pushToLog(currentTime - startTime);
             $interval.cancel(interval);
             options.running = false;
             options.showreset = true;
+
+            //Remove time from local storage
+            localStorage.removeItem('startTime');
+            localStorage.removeItem('endTime');
             
             //broadcast to any interested controllers that the timer has been stopped.
             var tableForm = { phase: selectedPhaseStopwatch, description: descriptionStopwatch, startTime: startTime, currentTime: currentTime, interval: options.interval, offset: offset, elapsed: currentTime - startTime };
