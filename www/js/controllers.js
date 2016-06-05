@@ -418,6 +418,11 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
 
         //listen for stopwatch stopped.
         $scope.$on('ic-stopwatch-stopped', function (event, args ) {
+			
+			
+			window.localStorage.setItem('timeStorage', 'false');
+			
+			
             console.log(args);
             console.log('description: ' + args.description);
             console.log('phase: ' + args.phase);
@@ -450,15 +455,17 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
             console.log('logging timesheetline: ' + $scope.Timesheet);
             //var employe = "";
 
-            // window.localStorage.setItem('timeStorage', 'false');
+            
 
-            if (localStorage.getItem('timeStorage') === 'true') {
-               // window.localStorage.setItem('timeStorage', 'false');
-                createStorageTimesheet();
-                // window.localStorage.setItem('timeStorage', 'false');
+            if (localStorage.getItem('timeStorage') === 'false') {
+               	// window.localStorage.setItem('timeStorage', 'false');
+              	alert('create time sheet');
+			  	// A confirm dialog
+               	showConfirm();
+				
             } else {
-                // A confirm dialog
-                showConfirm();
+				alert('create time sheet');
+				createStorageTimesheet();
                // window.localStorage.setItem('timeStorage', 'false');
             }
 
