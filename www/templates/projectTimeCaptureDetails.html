@@ -80,7 +80,7 @@
                                 </label>
                                 <label class="item item-input " id="nominalTimeCaptureLogTime-textarea2">
                                     <span class="input-label">Description</span>
-                                    <textarea placeholder="" ng-model="description" required> </textarea>
+                                    <textarea placeholder="" ng-model="description" id="project_description" required> </textarea>
                                 </label>
 
 
@@ -129,7 +129,7 @@
                                                 </div>
                                                 <button id="nominal-log-start" ng-hide="options.running"
                                                         class=" button button-balanced  button-block "
-                                                        ng-click="startTimer(customer)">
+                                                        ng-click="startTimer(customer, selectedPhaseStopwatch, descriptionStopwatch)">
                                                     Start
                                                 </button>
                                                 <button id="nominal-log-stop" ng-show="options.running"
