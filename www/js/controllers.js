@@ -407,16 +407,6 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
         //listen for the stopwatch to be started.
         $scope.$on('ic-stopwatch-started', function (event, args) {
 
-            // if the timer is still running grab all the values from that project and put into local storage
-            if (localStorage.getItem('timeStorage') === 'false') {
-                window.localStorage.setItem('projectStorage', $scope.Project.id);
-                // window.localStorage.setItem('dateStorage', startTimeStorage);
-                // window.localStorage.setItem('durationStorage', startTimeStorage);
-                window.localStorage.setItem('projectPhaseStorage', args.phase);
-                window.localStorage.setItem('descriptionStorage', args.description);
-                window.localStorage.setItem('workTypeStorage', 'Project');
-            }
-
             console.log(args);
             console.log('description: ' + args.description);
             console.log('phase: ' + args.phase);
@@ -426,15 +416,16 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
             //Log StartTime
             $scope.Timesheet.starttime = $filter('date')(new Date(), 'dd/MM/yyyy hh:mm:ss');
 
+            // if the timer is still running grab all the values from that project and put into local storage
+            if (localStorage.getItem('timeStorage') === 'false') {
+                window.localStorage.setItem('projectStorage', $scope.Project.id);
+                window.localStorage.setItem('projectPhaseStorage', args.phase);
+                window.localStorage.setItem('descriptionStorage', args.description);
+                window.localStorage.setItem('workTypeStorage', 'Project');
+            }
 
-
-            // window.localStorage.setItem('projectStorage', $scope.Project.id);
-            // // window.localStorage.setItem('dateStorage', startTimeStorage);
-            // // window.localStorage.setItem('durationStorage', startTimeStorage);
-            // window.localStorage.setItem('projectPhaseStorage', $scope.selectedPhase);
-            // window.localStorage.setItem('descriptionStorage', $scope.Timesheet.description);
-            // window.localStorage.setItem('workTypeStorage', 'Project');
-            window.localStorage.setItem('timeStorage', 'true'); 
+            window.localStorage.setItem('timeStorage', 'true');
+            window.localStorage.setItem('startDateStorage', $filter('date')(new Date(), 'dd/MM/yyyy'));
 
         });
         
@@ -541,9 +532,7 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
                     ).finally(function ($ionicLoading) {
                         $scope.hide($ionicLoading);
                     });
-
-                    //options.resetTimer();
-                    //options.showreset = false;
+                    
                 } else {
                     console.log('Dont Create the Timesheet');
                 }
@@ -554,38 +543,6 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
         //listen for local storage stopwatch stopped.
         $scope.$on('ic-local-stopwatch-stopped', function (event, args ) {
 
-            // console.log(args);
-            // console.log('description: ' + args.description);
-            // console.log('phase: ' + args.phase);
-            //
-            // //Remove time from local storage
-            //
-            // // localStorage.removeItem('startTimeStorage');
-            // // localStorage.removeItem('endTimeStorage');
-            //
-            // //convert the timestamp to a date time object
-            // var elapsed = args.elapsed;
-            // var hours = parseInt(elapsed / 3600000, 10);
-            // elapsed %= 3600000;
-            // var mins = parseInt(elapsed / 60000, 10);
-            // elapsed %= 60000;
-            // var secs = parseInt(elapsed / 1000, 10);
-            // var ms = elapsed % 1000;
-            //
-            // //startTime: startTime, currentTime: new Date().getTime(), interval: options.interval, offset: offset, elapsed: offset + (currentTime - startTime) };
-            // $scope.Timesheet.date = new Date(args.startTime);
-            // $scope.Timesheet.starttime = new Date(args.startTime);
-            // $scope.Timesheet.endtime = new Date(args.currentTime);
-            // //console.log('logging...' + args.currentTime + ' - ' + (new Date(args.currentTime)) + ' - ' + (new Date(args.currentTime)).toUTCString());
-            // $scope.Timesheet.duration = hours + ':' + mins + ':' + secs;
-            // $scope.Timesheet.project = $scope.Project.id;
-            // $scope.Timesheet.phase = args.phase;
-            // $scope.Timesheet.description = args.description;
-            // $scope.Timesheet.worktype = "Project";
-            // $scope.Timesheet.employee = $rootScope.globals.currentUser.id;
-            // console.log('logging timesheetline: ' + $scope.Timesheet);
-            //var employe = "";
-
             // A confirm dialog
             createStorageTimesheet();
 
@@ -594,38 +551,55 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
         createStorageTimesheet = function () {
 
             console.log('Storage Timesheet');
-
+            
+            //Set the running timer to false and get the end date
             window.localStorage.setItem('timeStorage', 'false');
+            window.localStorage.setItem('endDateStorage', $filter('date')(new Date(), 'dd/MM/yyyy'));
 
-            // var timesheet = {
-            //     //fill the timesheet out and send it to the create method.
-            //     project: $scope.Timesheet.project,
-            //     projectphase: $scope.Timesheet.phase,
-            //     employee: $scope.Timesheet.employee,
-            //     date: $scope.Timesheet.date,
-            //     starttime: $scope.Timesheet.starttime,
-            //     endtime: $scope.Timesheet.endtime,
-            //     duration: $scope.Timesheet.duration,
-            //     description: $scope.Timesheet.description,
-            //     worktype: $scope.Timesheet.worktype
-            // }
-            //
-            // timesheetService.createTimesheet(timesheet);
-            //
-            //
-            // $scope.show($ionicLoading);
-            //
-            //
-            //
-            // //update the current project record
-            // return projectService.getProject($stateParams.Id, true).then(function (Project) {
-            //         if (Project != null) {
-            //             $scope.Project = Project;
-            //         }
-            //     }
-            // ).finally(function ($ionicLoading) {
-            //     $scope.hide($ionicLoading);
-            // });
+            //Pass all of the local storage from running timer into timesheet object
+            var timesheet = {
+                //fill the timesheet out and send it to the create method.
+                project: localStorage.getItem('projectStorage'),
+                projectphase: localStorage.getItem('projectPhaseStorage'),
+                employee: $rootScope.globals.currentUser.id,
+                date: localStorage.getItem('startDateStorage'),
+                starttime: localStorage.getItem('startDateStorage'),
+                endtime: localStorage.getItem('endDateStorage'),
+                duration: localStorage.getItem('durationStorage'),
+                description: localStorage.getItem('descriptionStorage'),
+                worktype: localStorage.getItem('workTypeStorage')
+            }
+
+            //Create the timesheet
+            timesheetService.createTimesheet(timesheet);
+
+            // Show loading popup
+            $scope.show($ionicLoading);
+
+            //update the current project record
+            return projectService.getProject($stateParams.Id, true).then(function (Project) {
+                    if (Project != null) {
+                        $scope.Project = Project;
+                    }
+                }
+            ).finally(function ($ionicLoading) {
+                //Hide the loading popup and remove everything from local storage
+                $scope.hide($ionicLoading);
+
+                // just in case...
+                localStorage.removeItem('projectStorage');
+                localStorage.removeItem('projectPhaseStorage');
+                localStorage.removeItem('startDateStorage');
+                localStorage.removeItem('startTimeStorage');
+                localStorage.removeItem('endDateStorage');
+                localStorage.removeItem('endTimeStorage');
+                localStorage.removeItem('durationStorage');
+                localStorage.removeItem('descriptionStorage');
+                localStorage.removeItem('workTypeStorage');
+
+                //Set the running timer to false so we know that no other timer is running
+                window.localStorage.setItem('timeStorage', 'false');
+            });
         }
 
 
@@ -765,8 +739,6 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
 
     .controller('landingPageCtrl', ['$scope', '$ionicSideMenuDelegate', function ($scope, $ionicSideMenuDelegate) {
         $ionicSideMenuDelegate.canDragContent(false);
-        //$ionicSideMenuDelegate.toggleLeft();
-        
     }])
 
 

@@ -88,24 +88,10 @@
                         interval = $interval(self.updateTime, options.interval);
                         options.running = true;
                         options.showreset = false;
-
-
-                        //     project: $scope.Timesheet.project,
-                        //     projectphase: $scope.Timesheet.phase,
-                        //     employee: $scope.Timesheet.employee,
-                        //     date: $scope.Timesheet.date,
-                        //     starttime: $scope.Timesheet.starttime,
-                        //     endtime: $scope.Timesheet.endtime,
-                        //     duration: $scope.Timesheet.duration,
-                        //     description: $scope.Timesheet.description,
-                        //     worktype: $scope.Timesheet.worktype
-
+                        
                         //Add start time to local storage. If this has a value then we know the timer is running.
-                        //window.localStorage.setItem('timeStorage', 'true');
                         window.localStorage.setItem('startTimeStorage', startTimeStorage);
                         
-                        
-
                         //broadcast to any interested controllers that the timer has been stopped.
                         var tableForm = {
                             phase: selectedPhaseStopwatch,
@@ -133,10 +119,18 @@
                     timerPopup.then(function (res) {
                         if (res) {
 
-                            // //Remove time from local storage
-                            // window.localStorage.setItem('timeStorage', false);
-                            // localStorage.removeItem('startTimeStorage');
-                            // localStorage.removeItem('endTimeStorage');
+                            // Set the end time for the already running project
+                            window.localStorage.setItem('endTimeStorage', new Date().getTime());
+
+                            // how long has the other timer been running? - convert local storage milliseconds time to something more readable
+                            var projectTimeMilliSeconds = window.localStorage.getItem('endTimeStorage') - window.localStorage.getItem('startTimeStorage');
+                            var mydate = new Date(projectTimeMilliSeconds);
+                            var projectTime = mydate.getUTCHours() + ":" + mydate.getUTCMinutes() + ":" + mydate.getUTCSeconds();
+
+                            // set the timer duration
+                            window.localStorage.setItem('durationStorage', projectTime);
+
+                            //console.log('local storage time: ' + projectTime);
 
                             var tableForm = {
                                 startTime: startTime,
@@ -146,42 +140,9 @@
                                 elapsed: currentTime - startTime
                             };
 
+                            // broadcast to controller that the local storage timer has stopped
                             $rootScope.$broadcast("ic-local-stopwatch-stopped", tableForm);
-                            //window.localStorage.setItem('timeStorage', 'true');
-
-
-                            // window.localStorage.setItem('endTimeStorage', new Date().getTime());
-                            //
-                            // // convert local storage milliseconds time to something more readable
-                            // var projectTimeMilliSeconds = window.localStorage.getItem('endTimeStorage') - window.localStorage.getItem('startTimeStorage');
-                            // var mydate = new Date(projectTimeMilliSeconds);
-                            // var projectTime = mydate.getUTCHours() + " hours, " + mydate.getUTCMinutes() + " minutes and " + mydate.getUTCSeconds() + " second(s)";
-                            //
-                            // console.log('local storage time: ' + projectTime);
-                            //
-                            // options.running = true;
-                            //
-                            // //startTime = new Date().getTime();
-                            // interval = $interval(self.updateTime, options.interval);
-                            // options.showreset = false;
-                            //
-                            // //Add start time to local storage. If this has a value then we know the timer is running.
-                            // window.localStorage.setItem('startTimeStorage', startTime);
-                            //
-                            // // broadcast to any interested controllers that the timer has been stopped.
-                            // var tableForm = {
-                            //     startTime: startTime,
-                            //     currentTime: new Date().getTime(),
-                            //     interval: options.interval,
-                            //     offset: offset,
-                            //     elapsed: currentTime - startTime
-                            // };
-                            //
-                            // $rootScope.$broadcast("ic-stopwatch-stopped", tableForm);
-
-                        } else {
-
-                        }
+                        } 
                     });
 
                 }
@@ -190,10 +151,6 @@
             };
 
             self.stopTimer = function (selectedPhaseStopwatch, descriptionStopwatch) {
-
-                // alert('phase ' + selectedPhaseStopwatch);
-                // alert('description ' + descriptionStopwatch);
-
 
                 if (options.running === false) {
                     return;
