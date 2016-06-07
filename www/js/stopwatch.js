@@ -77,6 +77,18 @@
 
             self.startTimer = function (customer, selectedPhaseStopwatch, descriptionStopwatch) {
 
+                if(selectedPhaseStopwatch == null || selectedPhaseStopwatch == '') {
+                    //$scope.validationPhaseStopwatch = true;
+                    document.getElementById("selectedPhaseStopwatch").style.border = "1px solid red";
+                    return false;
+                }
+
+                if(descriptionStopwatch == null || descriptionStopwatch == '') {
+                    //$scope.validationDescriptionStopwatch = true;
+                    document.getElementById("descriptionStopwatch").style.border = "1px solid red";
+                    return false;
+                }
+
                 // Check to see if a timer is already running in local storage
                 if (localStorage.getItem("timeStorage") === 'false') {
                     console.log('no running timer');

@@ -292,6 +292,10 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
     })
 
     .controller('projectTimeCaptureDetailsCtrl', function ($scope, $rootScope, $filter, $stateParams, projectService, StopwatchFactory, $ionicPopup, timesheetService, $ionicLoading) {
+
+        $scope.validationPhase = false;
+        $scope.validationDescription = false;
+
         $scope.Project = projectService.getProject($stateParams.Id, false);
         $scope.Timesheet = {};
 
@@ -311,7 +315,21 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
         };
 
         //listen for manual time entry
-        $scope.createTimeLine = function createTimeLine(selectedPhase, description, fromDate, fromTime, toDate, toTime) {
+        $scope.createTimeLine = function createTimeLine(selectedPhase, description, selectedPhaseStopwatch, descriptionStopwatch, fromDate, fromTime, toDate, toTime) {
+
+            $scope.validationPhase = false;
+            $scope.validationDescription = false;
+
+            if(description == null || description == '') {
+                $scope.validationDescription = true;
+                return false;
+            }
+
+            if(selectedPhase == null || selectedPhase == '') {
+                $scope.validationPhase = true;
+                return false;
+            }
+
             $scope.Timesheet.project = $scope.Project.id;
             $scope.Timesheet.phase = selectedPhase;
             $scope.Timesheet.description = description;
@@ -405,11 +423,11 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
 
 
         //listen for the stopwatch to be started.
-        $scope.$on('ic-stopwatch-started', function (event, args) {
+        $scope.$on('ic-stopwatch-started', function (event, args, selectedPhaseStopwatch, descriptionStopwatch ) {
 
             console.log(args);
-            console.log('description: ' + args.description);
-            console.log('phase: ' + args.phase);
+            // console.log('description: ' + args.description);
+            // console.log('phase: ' + args.phase);
 
             //Log Date
             $scope.Timesheet.date = $filter('date')(new Date(), 'dd/MM/yyyy');
@@ -433,18 +451,12 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
         //listen for stopwatch stopped.
         $scope.$on('ic-stopwatch-stopped', function (event, args ) {
 			
-			
+			//set the timer storage to false to show that there is not other timer running
 			window.localStorage.setItem('timeStorage', 'false');
-			
 			
             console.log(args);
             console.log('description: ' + args.description);
             console.log('phase: ' + args.phase);
-
-            //Remove time from local storage
-
-            // localStorage.removeItem('startTimeStorage');
-            // localStorage.removeItem('endTimeStorage');
 
             //convert the timestamp to a date time object
             var elapsed = args.elapsed;
@@ -472,19 +484,6 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
 
             // A confirm dialog
             showConfirm();
-
-            // if (localStorage.getItem('timeStorage') === 'false') {
-            //    	// window.localStorage.setItem('timeStorage', 'false');
-            //   	alert('create time sheet');
-			 //  	// A confirm dialog
-            //    	showConfirm();
-				//
-            // } else {
-				// alert('local storage timesheet');
-				// createStorageTimesheet();
-            //    // window.localStorage.setItem('timeStorage', 'false');
-            // }
-
         });
 
 
@@ -601,8 +600,7 @@ angular.module('app.controllers', ['ionic', 'stopWatchApp', 'Authentication'])
                 window.localStorage.setItem('timeStorage', 'false');
             });
         }
-
-
+        
 
     })
 
