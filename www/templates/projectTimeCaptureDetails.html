@@ -72,7 +72,7 @@
                                 <label class="item item-select " id="projectTimeCaptureLogTime-select1"
                                        name="Project Phase">
                                     <span class="input-label">Select</span>
-                                    <select ng-model="selectedPhase">
+                                    <select ng-model="selectedPhase" ng-style="validationPhase && {'border':'1px solid red'}">
                                         <option ng-repeat="option in Project.project_phases" value="{{option.id}}">
                                             {{option.intellic_projectphasecategory}}
                                         </option>
@@ -80,7 +80,7 @@
                                 </label>
                                 <label class="item item-input " id="nominalTimeCaptureLogTime-textarea2">
                                     <span class="input-label">Description</span>
-                                    <textarea placeholder="" ng-model="description" id="project_description" required> </textarea>
+                                    <textarea placeholder="" ng-model="description" id="project_description" ng-style="validationDescription && {'border':'1px solid red'}"> </textarea>
                                 </label>
 
 
@@ -107,7 +107,7 @@
                                 <label class="item item-select " id="projectTimeCaptureLogTime-select11"
                                        name="Project Phase">
                                     <span class="input-label">Select</span>
-                                    <select ng-model="selectedPhaseStopwatch" >
+                                    <select ng-model="selectedPhaseStopwatch" id="selectedPhaseStopwatch">
                                         <option ng-repeat="option in Project.project_phases" value="{{option.id}}">
                                             {{option.intellic_projectphasecategory}}
                                         </option>
@@ -115,7 +115,7 @@
                                 </label>
                                 <label class="item item-input " id="nominalTimeCaptureLogTime-textarea22">
                                     <span class="input-label">Description</span>
-                                    <textarea placeholder="" ng-model="descriptionStopwatch" required> </textarea>
+                                    <textarea placeholder="" ng-model="descriptionStopwatch" id="descriptionStopwatch"> </textarea>
                                 </label>
 
                                 <div ng-app="stopWatchApp" ng-controller="stopWatchDemoCtrl" ng-show="UseTimer">
