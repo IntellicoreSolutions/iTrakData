@@ -50,7 +50,7 @@ body {
 }
 
 h1 {
-    color: #1abfd3;
+    color: #00c1d5;
     font-weight: lighter;
     font-family: "Poiret One";
     font-size: 50px;
@@ -64,9 +64,9 @@ h1 {
 
 .ic_button {
     background: none;
-    border: 2px solid #1abfd3;
+    border: 2px solid #00c1d5;
     border-radius: 8px;
-    color: #1abfd3;
+    color: #00c1d5;
     cursor: pointer;
     font-size: 17px;
     font-weight: bold;
@@ -138,7 +138,7 @@ h1 {
 }
 
 .bg-blue {
-    background: #1abfd3;
+    background: #00c1d5;
 }
 
 .bg-green {
@@ -151,6 +151,10 @@ h1 {
 
 .bg-transparent {
     background-color: transparent;
+}
+
+.blue {
+    color:#00c1d5;
 }
 
 /*fg-black {*/
@@ -172,11 +176,15 @@ h1 {
 
 .login_button {
     padding: 10px;
+    background: none;
+    color: #fff;
+    border: 2px solid;
 }
 
 .login_button.activated {
-    background: #1abfd3 !important;
-    color: #fff !important;
+    /*background: #00c1d5 !important;*/
+    /*color: #fff !important;*/
+    background: #4bd6a4 !important;
 }
 .skip {
     position: absolute;
@@ -197,6 +205,7 @@ h1 {
 
 .project_table {
     font-size: 16px;
+    color:#fff;
 }
 
 .project_table tr td {
@@ -206,10 +215,12 @@ h1 {
 .slider-slide h2 {
     text-align: left !important;
     font-size: 18px;
+    color: #fff;
 }
 .slider-slide h4 {
     font-size: 16px;
     display: inline-block;
+    color: #fff;
 }
 
 #project_description, #descriptionStopwatch {
@@ -218,8 +229,8 @@ h1 {
 
 
 .tab-item.tab-item-active, .tab-item.active, .tab-item.activated {
-    //color: #1abfd3 !important;
-    border-color: #1abfd3 !important;
+    //color: #00c1d5 !important;
+    border-color: #00c1d5 !important;
 }
 
 .tab_background {
@@ -237,7 +248,7 @@ h1 {
 }
 
 .ic_info_tab {
-    background: url('../img/svg-icons/info.svg');
+    background: url('../img/svg-icons/info-white.svg');
     height: 30px;
     background-size: contain !important;
     background-repeat: no-repeat !important;
@@ -245,7 +256,7 @@ h1 {
 }
 
 .ic_time_tab {
-        background: url('../img/svg-icons/clock.svg');
+        background: url('../img/svg-icons/clock-white.svg');
     height: 30px;
     background-size: contain !important;
     background-repeat: no-repeat !important;
@@ -253,7 +264,7 @@ h1 {
 }
 
 .ic_history_tab {
-        background: url('../img/svg-icons/clock-1.svg');
+        background: url('../img/svg-icons/clock-1-white.svg');
     height: 30px;
     background-size: contain !important;
     background-repeat: no-repeat !important;
@@ -262,4 +273,21 @@ h1 {
 
 .stopwatch_area {
     margin-top: 30px;
+}
+
+.side_menu {
+    background: #00c1d5;
+}
+
+.side_menu .item {
+    background: none;
+    color: #fff;
+}
+
+.side_menu .item-content {
+    background:none;
+}
+
+.dark_grey_background {
+    background-color: #363636;
 }
