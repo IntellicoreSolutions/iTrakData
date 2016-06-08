@@ -18,7 +18,7 @@
     /*background-repeat: no-repeat !important;*/
     /*background-position: center center !important;*/
 
-    background-color: #00c1d5;
+    background-color: #363636;
 
     /*top: 80px !important;*/
 }
@@ -176,15 +176,15 @@ h1 {
 
 .login_button {
     padding: 10px;
-    background: none;
-    color: #fff;
-    border: 2px solid;
+    /*background: none;*/
+    /*color: #fff;*/
+    /*border: 2px solid;*/
 }
 
 .login_button.activated {
-    /*background: #00c1d5 !important;*/
-    /*color: #fff !important;*/
-    background: #4bd6a4 !important;
+    background: #00c1d5 !important;
+    color: #fff !important;
+    /*background: #4bd6a4 !important;*/
 }
 .skip {
     position: absolute;
@@ -276,12 +276,13 @@ h1 {
 }
 
 .side_menu {
-    background: #00c1d5;
+    background: #363636;
 }
 
 .side_menu .item {
     background: none;
     color: #fff;
+    border-color: #464646;
 }
 
 .side_menu .item-content {
