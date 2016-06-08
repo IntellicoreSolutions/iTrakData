@@ -1,10 +1,14 @@
 .tabbed-slidebox .slider {
-    height: calc(100vh - 210px);
+    height: 100%
 }
 
 .tabbed-slidebox .slider-slide {
-    height: 100vh;
+    /*height: 100vh;*/
     width: auto;
+}
+
+.slider-slide {
+    height: auto;
 }
 
 .tabbed-slidebox.btm .slider {

@@ -196,10 +196,16 @@ h1 {
 /*}*/
 
 .back_landing_button {
-    font-size: 22px;
+    /*font-size: 22px;*/
+    /*margin-left: 10px;*/
+    /*margin-top: 7px;*/
+    /*color: #444;*/
+    /*text-decoration: none;*/
+
+    font-size: 16px;
     margin-left: 10px;
     margin-top: 7px;
-    color: #444;
+    color: #fff;
     text-decoration: none;
 }
 
@@ -290,5 +296,5 @@ h1 {
 }
 
 .dark_grey_background {
-    background-color: #363636;
+    background-color: #363636 !important;
 }
