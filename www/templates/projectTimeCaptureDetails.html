@@ -1,23 +1,34 @@
 <ion-view title="Project Time Capture - Details" id="page11" class=" ">
-    <ion-content padding="true" class="has-header dark_grey_background" scroll="true">
-        <ion-scroll>
-            <h3 id="projectTimeCaptureDetails-heading1" style="text-align:center;" class="blue">
-                {{Project.intellic_customer}} - {{Project.intellic_name}}</h3>
-            <h5 id="H1" style="text-align:center;" class="blue">{{Project.intellic_projectidentification}}</h5>
-            <!--<div id="projectTimeCaptureDetails-button-bar1" class=" button-bar ">
-                <button id="projectTimeCaptureDetails-button4" class=" button button-dark  button-block ">Details</button>
-                <a ui-sref="tabsController.projectTimeCaptureLogTime" id="projectTimeCaptureDetails-button5" class=" button button-light  button-block button-outline ">Log Time</a>
-            </div>-->
-            <tab-slide-box tab="0">
-                <div class="tsb-icons">
-                    <div class="tsb-ic-wrp">
-                        <a href="javascript:;" class="ic_info_tab"></a>
-                        <a href="javascript:;" class="ic_time_tab"></a>
-                        <a href="javascript:;" class="ic_history_tab"></a>
-                    </div>
-                </div>
-                <ion-slide-box show-pager="true" on-slide-changed="slideHasChanged($index)">
-                    <ion-slide>
+    <ion-content padding="true" class="has-header light_grey_background">
+        <!--<h3 id="projectTimeCaptureDetails-heading1" style="text-align:center;" class="blue">-->
+        <!--{{Project.intellic_customer}} - {{Project.intellic_name}}</h3>-->
+        <!--<h5 id="H1" style="text-align:center;" class="blue">{{Project.intellic_projectidentification}}</h5>-->
+        <!--<div id="projectTimeCaptureDetails-button-bar1" class=" button-bar ">
+            <button id="projectTimeCaptureDetails-button4" class=" button button-dark  button-block ">Details</button>
+            <a ui-sref="tabsController.projectTimeCaptureLogTime" id="projectTimeCaptureDetails-button5" class=" button button-light  button-block button-outline ">Log Time</a>
+        </div>-->
+
+
+        <!-- THIS WAS WRAPPED AROUND THE SLIDE BOX -->
+        <!--<tab-slide-box tab="1">-->
+        <!--<div class="tsb-icons">-->
+        <!--<div class="tsb-ic-wrp">-->
+        <!--<a href="javascript:;" class="ic_info_tab"></a>-->
+        <!--<a href="javascript:;" class="ic_time_tab"></a>-->
+        <!--<a href="javascript:;" class="ic_history_tab"></a>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</tab-slide-box>-->
+
+        <ion-slide-box show-pager="true" on-slide-changed="slideHasChanged($index)">
+            <ion-slide>
+                <ion-content class="slider_content">
+                    <ion-scroll class="slider_scroll">
+                        <h3 id="projectTimeCaptureDetails-heading1" style="text-align:center;" class="blue">
+                            {{Project.intellic_customer}} - {{Project.intellic_name}}</h3>
+                        <h5 id="H1" style="text-align:center;" class="blue">
+                            {{Project.intellic_projectidentification}}</h5>
+
                         <h2>Project Details</h2>
 
                         <table style="text-align:left" class="project_table">
@@ -55,9 +66,51 @@
                             </ion-item>
                         </ion-list>
 
-                    </ion-slide>
-                    <ion-slide>
-                        <h2>Time Tracker</h2>
+
+                        <h2>Project Details</h2>
+                        <h2>Project Details</h2>
+                        <h2>Project Details</h2>
+                        <h2>Project Details</h2>
+                        <h2>Project Details</h2>
+                        <h2>Project Details</h2>
+                        <h2>Project Details</h2>
+                        <h2>Project Details</h2>
+                        <h2>Project Details</h2>
+                        <h2>Project Details</h2>
+                        <h2>Project Details</h2>
+                        <h2>Project Details</h2>
+                        <h2>Project Details</h2>
+                        <h2>Project Details</h2>
+                        <h2>Project Details</h2>
+                        <h2>Project Details</h2>
+                        <h2>Project Details</h2>
+                        <h2>Project Details</h2>
+                        <h2>Project Details</h2>
+                        <h2>Project Details</h2>
+                        <h2>Project Details</h2>
+                        <h2>Project Details</h2>
+                        <h2>Project Details</h2>
+                        <h2>Project Details</h2>
+                        <h2>Project Details</h2>
+                        <h2>Project Details</h2>
+                        <h2>Project Details</h2>
+                        <h2>Project Details</h2>
+                        <h2>Last ONE</h2>
+
+
+
+
+                    </ion-scroll>
+                </ion-content>
+            </ion-slide>
+            <ion-slide>
+                <ion-content class="slider_content">
+                    <ion-scroll class="slider_scroll">
+                        <h3 style="text-align:center;" class="blue">
+                            {{Project.intellic_customer}} - {{Project.intellic_name}}</h3>
+                        <h5 style="text-align:center;" class="blue">{{Project.intellic_projectidentification}}</h5>
+
+                        <h2>Time Tracker - {{Project.intellic_customer}}</h2>
                         <ion-toggle toggle-class="toggle-positive" id="nominalTimeCaptureLogTime-toggle3"
                                     ng-model="UseTimer" ng-change="UserTimerToggled()">Timer Input
                         </ion-toggle>
@@ -123,7 +176,7 @@
                                     <div bb-stopwatch options="options">
                                         <div class="container">
                                             <div class="stopwatch_area">
-                                                <h1 id="H2" style="color:#000000;text-align:center;"
+                                                <h1 id="H2" style="color:#00c1d5;text-align:center;"
                                                     class="stopWatch numbers">{{options.elapsedTime |
                                                     stopwatchTime}}</h1>
                                             </div>
@@ -150,10 +203,13 @@
                                 </div>
                             </div>
                         </form>
+                    </ion-scroll>
+                </ion-content>
 
-
-                    </ion-slide>
-                    <ion-slide>
+            </ion-slide>
+            <ion-slide>
+                <ion-content class="slider_content">
+                    <ion-scroll class="slider_scroll">
                         <h2>Previous Timesheet Lines</h2>
 
                         <section id="cd-timeline" class="cd-container">
@@ -179,10 +235,9 @@
                                 </div>
                             </div>
                         </section>
-
-                    </ion-slide>
-                </ion-slide-box>
-            </tab-slide-box>
-        </ion-scroll>
+                    </ion-scroll>
+                </ion-content>
+            </ion-slide>
+        </ion-slide-box>
     </ion-content>
 </ion-view>

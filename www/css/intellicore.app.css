@@ -288,7 +288,7 @@ h1 {
 .side_menu .item {
     background: none;
     color: #fff;
-    border-color: #464646;
+    border-color: #363636;
 }
 
 .side_menu .item-content {
@@ -297,4 +297,21 @@ h1 {
 
 .dark_grey_background {
     background-color: #363636 !important;
+}
+
+.light_grey_background {
+    background-color: #464646 !important;
+}
+
+.slider {
+    height: 85vh;
+}
+
+/*.slider_content {*/
+    /*height: 100vh;*/
+/*}*/
+
+.slider_scroll  {
+    height: 100%;
+    padding-bottom: 100px;
 }
