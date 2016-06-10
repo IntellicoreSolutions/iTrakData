@@ -315,3 +315,7 @@ h1 {
     height: 100%;
     padding-bottom: 100px;
 }
+
+.side_menu .item-content .active {
+    background-color: red;
+}
