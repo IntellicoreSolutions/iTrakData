@@ -1,5 +1,5 @@
 <ion-view title="Project Time Capture - Details" id="page11" class=" ">
-    <ion-content padding="true" class="has-header light_grey_background">
+    <ion-content padding="true" class="has-header light_grey_background" scroll='false'>
         <!--<h3 id="projectTimeCaptureDetails-heading1" style="text-align:center;" class="blue">-->
         <!--{{Project.intellic_customer}} - {{Project.intellic_name}}</h3>-->
         <!--<h5 id="H1" style="text-align:center;" class="blue">{{Project.intellic_projectidentification}}</h5>-->
@@ -22,7 +22,7 @@
 
         <ion-slide-box show-pager="true" on-slide-changed="slideHasChanged($index)">
             <ion-slide>
-                <ion-content class="slider_content">
+               
                     <ion-scroll class="slider_scroll">
                         <h3 id="projectTimeCaptureDetails-heading1" style="text-align:center;" class="blue">
                             {{Project.intellic_customer}} - {{Project.intellic_name}}</h3>
@@ -101,10 +101,10 @@
 
 
                     </ion-scroll>
-                </ion-content>
+             
             </ion-slide>
             <ion-slide>
-                <ion-content class="slider_content">
+            
                     <ion-scroll class="slider_scroll">
                         <h3 style="text-align:center;" class="blue">
                             {{Project.intellic_customer}} - {{Project.intellic_name}}</h3>
@@ -204,11 +204,11 @@
                             </div>
                         </form>
                     </ion-scroll>
-                </ion-content>
+          
 
             </ion-slide>
             <ion-slide>
-                <ion-content class="slider_content">
+               
                     <ion-scroll class="slider_scroll">
                         <h2>Previous Timesheet Lines</h2>
 
@@ -236,7 +236,7 @@
                             </div>
                         </section>
                     </ion-scroll>
-                </ion-content>
+                
             </ion-slide>
         </ion-slide-box>
     </ion-content>

@@ -1,5 +1,7 @@
 angular.module('app.services', [])
 
+// http://192.168.1.152:5562/crmapi/project
+
 // define the Project factory
 .factory('projectService', function($http) {
     var projects;
@@ -20,7 +22,7 @@ angular.module('app.services', [])
 	    getProjects: function () {
 	        console.log('projectService Factory - in Get Projects');
 	        if (projects == null) {
-	            return $http.get("http://192.168.1.152:5562/crmapi/project").then(function (response) {
+	            return $http.get("http://192.168.1.30:5562/crmapi/project").then(function (response) {
 	                projects = response.data;
 	                return projects;
 	            });
@@ -32,7 +34,7 @@ angular.module('app.services', [])
 	    getProject: function (id, forceRefresh) {
 	        console.log('projectService Factory - in Get Project');
 	        console.log(id);
-	        var url = "http://192.168.1.152:5562/crmapi/project?uid=" + id;
+	        var url = "http://192.168.1.30:5562/crmapi/project?uid=" + id;
 	        if (project != null && project.id != id) {
 	            console.log('return the current project because it has the id im looking for');
 	            return project;
@@ -74,7 +76,7 @@ angular.module('app.services', [])
 	var nominal;
 	return {
 		getNominals: function(){
-		    return $http.get("http://192.168.1.152:5562/crmapi/nominal").then(function (response) {
+		    return $http.get("http://192.168.1.30:5562/crmapi/nominal").then(function (response) {
 		        nominals = response.data;
 		        console.log(response.data);
 				return nominals;
@@ -82,7 +84,7 @@ angular.module('app.services', [])
 		},
 		getNominal: function (id) {
 		    console.log(id);
-		    var url = "http://192.168.1.152:5562/crmapi/nominal?uid=" + id;
+		    var url = "http://192.168.1.30:5562/crmapi/nominal?uid=" + id;
 		    return $http.get(url).then(function (response) {
 		        nominal = response.data;
 		        console.log(nominal);
@@ -115,14 +117,14 @@ angular.module('app.services', [])
 	return {
 	    getOpportunities: function () {
 	        console.log('opportunityService Factory - in Get Opportunities');
-	        return $http.get("http://192.168.1.152:5562/crmapi/opportunity").then(function (response) {
+	        return $http.get("http://192.168.1.30:5562/crmapi/opportunity").then(function (response) {
 		        opportunities = response.data;
 				return opportunities;
 			});
 		},
 	    getOpportunity: function (id) {
 	        console.log('opportunityService Factory - in Get Opportunity');
-	        var url = "http://192.168.1.152:5562/crmapi/opportunity?uid=" + id;
+	        var url = "http://192.168.1.30:5562/crmapi/opportunity?uid=" + id;
 	        return $http.get(url).then(function (response) {
 	            opportunity = response.data;
 	            return opportunity;
@@ -133,7 +135,7 @@ angular.module('app.services', [])
 	        console.log(opportunity);
 
 	        return $http({
-	            url: 'http://192.168.1.152:5562/crmapi/opportunity',
+	            url: 'http://192.168.1.30:5562/crmapi/opportunity',
 	            method: 'POST',
 	            data: opportunity,
 	            headers: { 'Content-Type': 'application/json' }
@@ -154,7 +156,7 @@ angular.module('app.services', [])
 	return {
 	    getTickets: function () {
 	        console.log('ticketService Factory - in Get Tickets');
-	        return $http.get("http://192.168.1.152:5562/crmapi/ticket").then(function (response) {
+	        return $http.get("http://192.168.1.30:5562/crmapi/ticket").then(function (response) {
 	            tickets = response.data;
 	            console.log(tickets);
 				return tickets;
@@ -162,7 +164,7 @@ angular.module('app.services', [])
 		},
 	    getTicket: function (id) {
 	        console.log('ticketService Factory - in Get Ticket');
-	        var url = "http://192.168.1.152:5562/crmapi/nominal?uid=" + id;
+	        var url = "http://192.168.1.30:5562/crmapi/nominal?uid=" + id;
 	        return $http.get(url).then(function (response) {
 	            ticket = response.data;
 	            return ticket;
@@ -174,7 +176,7 @@ angular.module('app.services', [])
 			console.log(ticket);
 
 			return $http({
-			    url: 'http://192.168.1.152:5562/crmapi/ticket',
+			    url: 'http://192.168.1.30:5562/crmapi/ticket',
 				method: 'POST',
 				data: ticket,
 				headers: {'Content-Type': 'application/json'}
@@ -211,7 +213,7 @@ angular.module('app.services', [])
 			console.log(timesheetline);
 
 			return $http({
-			    url: 'http://192.168.1.152:5562/crmapi/timesheetline',
+			    url: 'http://192.168.1.30:5562/crmapi/timesheetline',
 				method: 'POST',
 				data: timesheetline,
 				headers: {'Content-Type': 'application/json'}
